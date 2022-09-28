@@ -9,9 +9,6 @@ import InfoIcon from '@mui/icons-material/Info';
 import BubbleChartIcon from '@mui/icons-material/BubbleChart';
 
 class Header extends React.Component {
-    constructor(props) {
-        super(props);
-    }
 
     render() {
         return (
