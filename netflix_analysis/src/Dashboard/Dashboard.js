@@ -21,6 +21,10 @@ import ScrollTop from './Components/ScrollTop';
 import DatasetInfo from './Components/DatasetInfo';
 import DatasetInfoDialog from './Components/DatasetInfoDialog';
 
+import SunburstChart from './Components/SunburstChart';
+import json from "./Components/data";
+
+
 import netflix_data from '../data/Netflix_cleaned.csv';
 
 class Dashboard extends React.Component {
@@ -30,7 +34,9 @@ class Dashboard extends React.Component {
             netflix_data: null,
             type: null,
             category: null,
-            openStatsInfo: false
+            openStatsInfo: false,
+            test_data: json,
+            test: [{"date":0,"value":71.70963114293787},{"date":1,"value":16.691956253386998},{"date":2,"value":68.5889267709376},{"date":3,"value":95.00376536027895},{"date":4,"value":69.58008923174164}]
         };
 
         this.handleOpenStatsInfo = this.handleOpenStatsInfo.bind(this);
@@ -74,6 +80,7 @@ class Dashboard extends React.Component {
 
     render() {
         return (
+
             <body>
                 <Container display='flex' maxWidth="lg" sx={{ mt: 4, mb: 4, minHeight: '100vh' }}>
 
@@ -135,13 +142,7 @@ class Dashboard extends React.Component {
                         <Grid item xs={12} md={6} lg={6}>
                             <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column', alignItems: 'center', }}>
                                 <Stack direction="row" justifyContent="center-end" alignItems='center' spacing={1}>
-                                    <IconButton
-                                        aria-label="info-stat"
-                                        aria-controls="info-data"
-                                        aria-haspopup="true"
-                                        size='large'
-                                        onClick={this.handleOpenStatsInfo}
-                                    >
+                                    <IconButton aria-label="info-stat" aria-controls="info-data" aria-haspopup="true" size='large' onClick={this.handleOpenStatsInfo}>
                                         <InfoIcon sx={{ color: 'background.contrastText', fontSize: 15 }} />
                                     </IconButton>
                                     <DatasetInfoDialog open={this.state.openStatsInfo} handleClose={this.handleCloseStatsInfo} />
@@ -151,34 +152,47 @@ class Dashboard extends React.Component {
                             </Paper>
                         </Grid>
 
-                        {/* altro */}
+
+                        {/*  
                         <Grid item xs={12} md={8} lg={8}>
                             <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column', alignItems: 'center', }}>
-                                Prova 1
+                                <DonutChart data={this.state.test}/>
+                            </Paper>
+                        </Grid>
+                    
+                        <Grid item xs={12} md={4} lg={4}>
+                            <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column', alignItems: 'center', }}>
+                                <Typography variant="h5"> Test </Typography>
+                                <Pie data={this.state.test} width={200} height={200} innerRadius={60} outerRadius={100}/>
                             </Paper>
                         </Grid>
 
-                        {/* altro */}
+                        <Grid item xs={12} md={8} lg={8}>
+                            <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column', alignItems: 'center', }}>
+                                prova 1
+                            </Paper>
+                        </Grid>
+
                         <Grid item xs={12} md={4} lg={4}>
                             <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column', alignItems: 'center', }}>
                                 prova 2
                             </Paper>
                         </Grid>
 
-                        {/* altro */}
                         <Grid item xs={12} md={6} lg={6}>
                             <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
                                 prova 3
                             </Paper>
                         </Grid>
-
+                        */}                                    
                         {/* altro */}
-                        <Grid item xs={12} md={12} lg={12} sx={{ mb: 0, pb: 0 }}>
-                            <Paper sx={{ p: 0.5, display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-                                prova 4
+                        <Grid item xs={12} md={12} lg={12}>
+                            <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+                                <SunburstChart data={this.state.test_data} size={500}/>                                
                             </Paper>
                         </Grid>
                     </Grid>
+
                 </Container>
             </body>
         );
