@@ -22,7 +22,12 @@ import DatasetInfo from './Components/DatasetInfo';
 import DatasetInfoDialog from './Components/DatasetInfoDialog';
 
 import SunburstChart from './Components/SunburstChart';
+import SunburstZoomableChart from './Components/SunburstZoomableChart';
+import BarChart from './Components/BarChart';
+
+
 import json from "./Components/data";
+import data from "./Components/alphabet.csv";
 
 
 import netflix_data from '../data/Netflix_cleaned.csv';
@@ -36,6 +41,7 @@ class Dashboard extends React.Component {
             category: null,
             openStatsInfo: false,
             test_data: json,
+            alpha_data: data,
             test: [{"date":0,"value":71.70963114293787},{"date":1,"value":16.691956253386998},{"date":2,"value":68.5889267709376},{"date":3,"value":95.00376536027895},{"date":4,"value":69.58008923174164}]
         };
 
@@ -189,6 +195,16 @@ class Dashboard extends React.Component {
                         <Grid item xs={12} md={12} lg={12}>
                             <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
                                 <SunburstChart data={this.state.test_data} size={500}/>                                
+                            </Paper>
+                        </Grid>
+                        <Grid item xs={12} md={12} lg={12}>
+                            <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+                                <SunburstZoomableChart data={this.state.test_data} size={600}/>                                
+                            </Paper>
+                        </Grid>
+                        <Grid item xs={12} md={12} lg={12}>
+                            <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+                                <BarChart data={this.state.alpha_data} size={600}/>                                
                             </Paper>
                         </Grid>
                     </Grid>

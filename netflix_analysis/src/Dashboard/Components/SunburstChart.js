@@ -27,6 +27,8 @@ class SunburstChart extends React.Component {
         // refrence to svg
         const node = this.state.ref.current
 
+        clean()
+
         const partition = (data) => d3.partition().size([2 * Math.PI, this.state.radius])(d3.hierarchy(data).sum((d) => d.value).sort((a, b) => b.value - a.value));
 
         const color = d3.scaleOrdinal(d3.quantize(d3.interpolateRainbow, this.props.data.children.length + 1));
@@ -68,11 +70,7 @@ class SunburstChart extends React.Component {
             .attr("font-size", this.state.font_size)
             .attr("font-family", "sans-serif")
             .selectAll("text")
-            .data(
-                root
-                    .descendants()
-                    .filter((d) => d.depth && ((d.y0 + d.y1) / 2) * (d.x1 - d.x0) > 10)
-            )
+            .data(root.descendants().filter((d) => d.depth && ((d.y0 + d.y1) / 2) * (d.x1 - d.x0) > 10))
             .join("text")
             .attr("transform", function (d) {
                 const x = (((d.x0 + d.x1) / 2) * 180) / Math.PI;
@@ -95,6 +93,12 @@ class SunburstChart extends React.Component {
 
             return [x, y, width, height].toString();
         };
+
+        function clean() {
+            d3.select(node)
+                .selectAll("*")
+                .remove()
+        }
 
     }
 
