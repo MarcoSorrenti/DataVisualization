@@ -21,16 +21,16 @@ import ScrollTop from './Components/ScrollTop';
 import DatasetInfo from './Components/DatasetInfo';
 import DatasetInfoDialog from './Components/DatasetInfoDialog';
 
-import SunburstChart from './Components/SunburstChart';
+import WordcloudChart from './Components/WordcloudChart';
 import SunburstZoomableChart from './Components/SunburstZoomableChart';
 import BarChart from './Components/BarChart';
 
-
-import json from "./Components/data";
-import data from "./Components/alphabet.csv";
-
-
 import netflix_data from '../data/Netflix_cleaned.csv';
+
+// TEST IMPORT
+import json from "./Components/data";
+import alpha_data from "./Components/alphabet.csv";
+import country from "./Components/country.csv"
 
 class Dashboard extends React.Component {
     constructor(props) {
@@ -41,7 +41,8 @@ class Dashboard extends React.Component {
             category: null,
             openStatsInfo: false,
             test_data: json,
-            alpha_data: data,
+            alpha_data: null,
+            country_data: country,
             test: [{"date":0,"value":71.70963114293787},{"date":1,"value":16.691956253386998},{"date":2,"value":68.5889267709376},{"date":3,"value":95.00376536027895},{"date":4,"value":69.58008923174164}]
         };
 
@@ -72,6 +73,17 @@ class Dashboard extends React.Component {
         this.setState({ netflix_data: d });
     }
 
+    loadCSV2 = async () => {
+        const d = await csv(alpha_data, function (d) {
+            return {
+                letter: d.letter,
+                frequency: d.frequency
+            };
+        })
+
+        this.setState({ alpha_data: d });
+    }
+
     handleOpenStatsInfo() {
         this.setState({ openStatsInfo: true });
     }
@@ -82,6 +94,7 @@ class Dashboard extends React.Component {
 
     componentDidMount() {
         this.loadCSV();
+        this.loadCSV2();
     }
 
     render() {
@@ -155,6 +168,7 @@ class Dashboard extends React.Component {
                                     <Typography variant="h5"> Dataset Information </Typography>
                                 </Stack>
                                 <DatasetInfo data={this.state.netflix_data} type={this.state.type} category={this.state.category} />
+                                {/* <SunburstZoomableChart data={this.state.test_data} size={600}/> */}
                             </Paper>
                         </Grid>
 
@@ -191,12 +205,11 @@ class Dashboard extends React.Component {
                             </Paper>
                         </Grid>
                         */}                                    
-                        {/* altro */}
-                        <Grid item xs={12} md={12} lg={12}>
+                    {/* <Grid item xs={12} md={12} lg={12}>
                             <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
                                 <SunburstChart data={this.state.test_data} size={500}/>                                
                             </Paper>
-                        </Grid>
+                        </Grid>*/}
                         <Grid item xs={12} md={12} lg={12}>
                             <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
                                 <SunburstZoomableChart data={this.state.test_data} size={600}/>                                
@@ -204,7 +217,12 @@ class Dashboard extends React.Component {
                         </Grid>
                         <Grid item xs={12} md={12} lg={12}>
                             <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-                                <BarChart data={this.state.alpha_data} size={600}/>                                
+                                <BarChart data={this.state.alpha_data} size={500}/>                                
+                            </Paper>
+                        </Grid>
+                        <Grid item xs={12} md={12} lg={12}>
+                            <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+                                <WordcloudChart data={this.state.alpha_data} size={500}/>                                
                             </Paper>
                         </Grid>
                     </Grid>
