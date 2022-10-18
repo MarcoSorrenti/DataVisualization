@@ -6,7 +6,6 @@ import Link from '@mui/material/Link';
 import Stack from '@mui/material/Stack';
 import LinkedInIcon from '@mui/icons-material/LinkedIn';
 import GitHubIcon from '@mui/icons-material/GitHub';
-import GAEvent from '../GAEvent';
 
 class Footer extends React.Component {
     constructor(props) {
@@ -34,12 +33,10 @@ class Footer extends React.Component {
                         <Typography variant='caption'>{this.state.copyright}</Typography>
                     </Box>
                     <Stack direction='row'>
-                        <Link onClick={GAEvent('Footer', 'Linkedin', '')}
-                            href='https://www.linkedin.com/in/marco-sorrenti/' target='_blank' >
+                        <Link href='https://www.linkedin.com/in/marco-sorrenti/' target='_blank' >
                             <LinkedInIcon sx={{ color: 'primary.contrastText', m: 0.5, fontSize: 30 }} />
                         </Link>
-                        <Link onClick={GAEvent('Footer', 'Github', '')}
-                            href='https://github.com/MarcoSorrenti/' target='_blank'>
+                        <Link href='https://github.com/MarcoSorrenti/' target='_blank'>
                             <GitHubIcon sx={{ color: 'primary.contrastText', m: 0.5, fontSize: 30 }} />
                         </Link>
                     </Stack>

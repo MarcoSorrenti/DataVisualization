@@ -9,6 +9,7 @@ import Stack from '@mui/material/Stack';
 import IconButton from '@mui/material/IconButton';
 import InfoIcon from '@mui/icons-material/InfoOutlined';
 import Radio from '@mui/material/Radio';
+import Slider from '@mui/material/Slider';
 import RadioGroup from '@mui/material/RadioGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import FormControl from '@mui/material/FormControl';
@@ -30,7 +31,7 @@ import netflix_data from '../data/Netflix_cleaned.csv';
 // TEST IMPORT
 import json from "./Components/data";
 import alpha_data from "./Components/alphabet.csv";
-import country from "./Components/country.csv"
+import dream from "./Components/dream.txt";
 
 class Dashboard extends React.Component {
     constructor(props) {
@@ -42,8 +43,8 @@ class Dashboard extends React.Component {
             openStatsInfo: false,
             test_data: json,
             alpha_data: null,
-            country_data: country,
-            test: [{"date":0,"value":71.70963114293787},{"date":1,"value":16.691956253386998},{"date":2,"value":68.5889267709376},{"date":3,"value":95.00376536027895},{"date":4,"value":69.58008923174164}]
+            dream_text: fetch(dream).then(r => r.text()).then(text => {this.state.dream_text = text}),
+            max_words: 150
         };
 
         this.handleOpenStatsInfo = this.handleOpenStatsInfo.bind(this);
@@ -212,17 +213,18 @@ class Dashboard extends React.Component {
                         </Grid>*/}
                         <Grid item xs={12} md={12} lg={12}>
                             <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-                                <SunburstZoomableChart data={this.state.test_data} size={600}/>                                
+                                <SunburstZoomableChart data={this.state.test_data} size={600} />                                
                             </Paper>
                         </Grid>
                         <Grid item xs={12} md={12} lg={12}>
                             <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-                                <BarChart data={this.state.alpha_data} size={500}/>                                
+                                <BarChart data={this.state.alpha_data} size={500} />                                
                             </Paper>
                         </Grid>
                         <Grid item xs={12} md={12} lg={12}>
                             <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-                                <WordcloudChart data={this.state.alpha_data} size={500}/>                                
+                                <Slider defaultValue={this.state.max_words} aria-label="Default" valueLabelDisplay="auto" step={10} min={50} max={300} onChange={(event) => {this.setState({ max_words: event.target.value })}} />
+                                <WordcloudChart data={this.state.dream_text} max_words={this.state.max_words}/>                                
                             </Paper>
                         </Grid>
                     </Grid>

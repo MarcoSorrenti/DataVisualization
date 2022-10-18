@@ -9,8 +9,7 @@ class BarChart extends React.Component {
         this.state = {
             ref: React.createRef(),
             width: this.props.size,
-            height: this.props.size * 2 / 3,
-            margin: { top: 20, right: 0, bottom: 30, left: 40 }
+            height: this.props.size * 2 / 3
         }
         this.createBarChart = this.createBarChart.bind(this)
     }
@@ -27,30 +26,34 @@ class BarChart extends React.Component {
         // refrence to svg
         const node = this.state.ref.current;
 
+        const margin = { top: 20, right: 0, bottom: 30, left: 40 }
+        const width = this.state.width
+        const height = this.state.height
+
         clean();
 
         const data = this.props.data.sort((a, b) => b.frequency - a.frequency);
 
         const x = d3.scaleBand()
             .domain(data.map(d => d.letter))
-            .range([this.state.margin.left, this.state.width - this.state.margin.right])
+            .range([margin.left, width - margin.right])
             .padding(0.1)
 
         const y = d3.scaleLinear()
             .domain([0, d3.max(data, d => d.frequency)]).nice()
-            .range([this.state.height - this.state.margin.bottom, this.state.margin.top])
+            .range([height - margin.bottom, margin.top])
 
         const xAxis = g => g
-            .attr("transform", `translate(0,${this.state.height - this.state.margin.bottom})`)
+            .attr("transform", `translate(0,${height - margin.bottom})`)
             .call(d3.axisBottom(x).tickSizeOuter(0))
 
         const yAxis = g => g
-            .attr("transform", `translate(${this.state.margin.left},0)`)
+            .attr("transform", `translate(${margin.left},0)`)
             .call(d3.axisLeft(y))
             .call(g => g.select(".domain").remove())
 
         const svg = d3.select(node)
-            .attr("viewBox", [0, 0, this.state.width, this.state.height])
+            .attr("viewBox", [0, 0, width, height])
 
         svg.append("g")
             .attr("class", "bars")
@@ -70,7 +73,6 @@ class BarChart extends React.Component {
         svg.append("g")
             .attr("class", "y-axis")
             .call(yAxis);
-
 
         function clean() {
             d3.select(node).selectAll("*").remove()
