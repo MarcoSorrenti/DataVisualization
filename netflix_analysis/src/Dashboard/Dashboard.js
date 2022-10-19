@@ -25,6 +25,8 @@ import DatasetInfoDialog from './Components/DatasetInfoDialog';
 import WordcloudChart from './Components/WordcloudChart';
 import SunburstZoomableChart from './Components/SunburstZoomableChart';
 import BarChart from './Components/BarChart';
+import StackedBarChart from './Components/StackedBarChart';
+
 
 import netflix_data from '../data/Netflix_cleaned.csv';
 
@@ -32,6 +34,8 @@ import netflix_data from '../data/Netflix_cleaned.csv';
 import json from "./Components/data";
 import alpha_data from "./Components/alphabet.csv";
 import dream from "./Components/dream.txt";
+import stacked_data from "./Components/propData.csv";
+
 
 class Dashboard extends React.Component {
     constructor(props) {
@@ -43,7 +47,8 @@ class Dashboard extends React.Component {
             openStatsInfo: false,
             test_data: json,
             alpha_data: null,
-            dream_text: fetch(dream).then(r => r.text()).then(text => {this.state.dream_text = text}),
+            dream_text: fetch(dream).then(r => r.text()).then(text => { this.state.dream_text = text }),
+            stacked_data: null,
             max_words: 150
         };
 
@@ -85,6 +90,12 @@ class Dashboard extends React.Component {
         this.setState({ alpha_data: d });
     }
 
+    loadCSV3 = async () => {
+        //const d = await csv(stacked_data)
+        const d = await fetch(stacked_data).then(r => r.text())
+        this.setState({ stacked_data: d });
+    }
+
     handleOpenStatsInfo() {
         this.setState({ openStatsInfo: true });
     }
@@ -96,6 +107,7 @@ class Dashboard extends React.Component {
     componentDidMount() {
         this.loadCSV();
         this.loadCSV2();
+        this.loadCSV3();
     }
 
     render() {
@@ -169,7 +181,8 @@ class Dashboard extends React.Component {
                                     <Typography variant="h5"> Dataset Information </Typography>
                                 </Stack>
                                 <DatasetInfo data={this.state.netflix_data} type={this.state.type} category={this.state.category} />
-                                {/* <SunburstZoomableChart data={this.state.test_data} size={600}/> */}
+                                <svg id="legend" height={40} width={450} />
+                                <StackedBarChart data={this.state.stacked_data}/>
                             </Paper>
                         </Grid>
 
@@ -205,26 +218,26 @@ class Dashboard extends React.Component {
                                 prova 3
                             </Paper>
                         </Grid>
-                        */}                                    
-                    {/* <Grid item xs={12} md={12} lg={12}>
+                        */}
+                        {/* <Grid item xs={12} md={12} lg={12}>
                             <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
                                 <SunburstChart data={this.state.test_data} size={500}/>                                
                             </Paper>
                         </Grid>*/}
                         <Grid item xs={12} md={12} lg={12}>
                             <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-                                <SunburstZoomableChart data={this.state.test_data} size={600} />                                
+                                <SunburstZoomableChart data={this.state.test_data} size={600} />
                             </Paper>
                         </Grid>
                         <Grid item xs={12} md={12} lg={12}>
                             <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-                                <BarChart data={this.state.alpha_data} size={500} />                                
+                                <BarChart data={this.state.alpha_data} size={500} />
                             </Paper>
                         </Grid>
                         <Grid item xs={12} md={12} lg={12}>
                             <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-                                <Slider defaultValue={this.state.max_words} aria-label="Default" valueLabelDisplay="auto" step={10} min={50} max={300} onChange={(event) => {this.setState({ max_words: event.target.value })}} />
-                                <WordcloudChart data={this.state.dream_text} max_words={this.state.max_words}/>                                
+                                <Slider defaultValue={this.state.max_words} aria-label="Default" valueLabelDisplay="auto" step={10} min={50} max={300} onChange={(event) => { this.setState({ max_words: event.target.value }) }} />
+                                <WordcloudChart data={this.state.dream_text} max_words={this.state.max_words} />
                             </Paper>
                         </Grid>
                     </Grid>
