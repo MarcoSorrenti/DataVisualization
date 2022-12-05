@@ -54,6 +54,7 @@ class BarChart extends React.Component {
 
         const svg = d3.select(node)
             .attr("viewBox", [0, 0, width, height])
+            .attr("style", "max-width: 100%; height: auto; height: intrinsic;");
 
         svg.append("g")
             .attr("class", "bars")

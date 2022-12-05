@@ -2,36 +2,38 @@ import React from 'react'
 
 import * as d3 from "d3"
 
-class StackedBarChart extends React.Component {
+class NormalizedStackedBarChart extends React.Component {
 
     constructor(props) {
         super(props)
         this.state = {
             ref: React.createRef()
         }
-        this.createBarChart = this.createBarChart.bind(this)
+        this.createStackedBarChart = this.createStackedBarChart.bind(this)
     }
 
     componentDidMount() {
-        this.props.data ? this.createBarChart() : console.log('no data')
+        this.props.data ? this.createStackedBarChart() : console.log('no data')
     }
 
     componentDidUpdate() {
-        this.props.data ? this.createBarChart() : console.log('no data')
+        this.props.data ? this.createStackedBarChart() : console.log('no data')
     }
 
-    createBarChart() {
+    createStackedBarChart() {
         // refrence to svg
         const node = this.state.ref.current;
 
-        const margin = { top: 10, right: 0, bottom: 10, left: 15 }
+        const margin = { top: 5, right: 0, bottom: 0, left: 60 }
         const width = 450 - margin.left - margin.right
-        const height = width / 3 - margin.top - margin.bottom
+        const height = width / 2 - margin.top - margin.bottom
 
         clean();
 
         const data = d3.csvParse(this.props.data.toString(), (d, i, columns) => (d3.autoType(d), d.total = d3.sum(columns, c => d[c]), d)).sort((a, b) => b["<10"] / b.total - a["<10"] / a.total)
+
         const series = d3.stack().keys(data.columns.slice(1)).offset(d3.stackOffsetExpand)(data).map(d => (d.forEach(v => v.key = d.key), d))
+
         const svg = d3.select(node)
             .attr("viewBox", [0, 0, width, height])
             .style("overflow", "visible");
@@ -39,7 +41,7 @@ class StackedBarChart extends React.Component {
         const x = d3.scaleLinear().range([margin.left, width - margin.right])
 
         const y = d3.scaleBand()
-            .domain(data.map(d => d.name))
+            .domain(data.map(d => d.country))
             .range([margin.top, height - margin.bottom])
             .padding(0.08)
 
@@ -53,6 +55,7 @@ class StackedBarChart extends React.Component {
 
         const yAxis = g => g
             .attr("transform", `translate(${margin.left},0)`)
+            .call(d3.axisLeft(y).tickSizeOuter(0))
             .call(g => g.selectAll(".domain").remove())
 
         const formatPercent = d3.format(".1%")
@@ -68,11 +71,11 @@ class StackedBarChart extends React.Component {
             .data(d => d)
             .join("rect")
             .attr("x", d => x(d[0]))
-            .attr("y", (d, i) => y(d.data.name))
+            .attr("y", (d, i) => y(d.data.country))
             .attr("width", d => x(d[1]) - x(d[0]))
             .attr("height", y.bandwidth())
             .append("title")
-            .text(d => `${d.data.name} ${d.key}${formatPercent(d[1] - d[0])} (${formatValue(d.data[d.key])})`);
+            .text(d => `${d.data.country} ${d.key}${formatPercent(d[1] - d[0])} (${formatValue(d.data[d.key])})`);
 
         svg.append("g")
             .selectAll("g")
@@ -83,11 +86,11 @@ class StackedBarChart extends React.Component {
             .selectAll("text")
             .data(d => d)
             .join("text")
-            .attr("transform", (d, i) => `translate(${x((d[0] + d[1]) / 2)},${y(d.data.name) + y.bandwidth()})`)
+            .attr("transform", (d, i) => `translate(${x((d[0] + d[1]) / 2)},${y(d.data.country) + y.bandwidth()})`)
             .call(text => text.append("tspan")
-                .attr("y", "-1.1em")
+                .attr("y", "-0.75em")
                 .attr("font-weight", "bolder")
-                .attr("font-size", 30)
+                .attr("font-size", 14)
                 .attr("fill", "white")
                 .text(d => d.data[d.key] !== 0 ? Math.round(d.data[d.key]*100/d.data['total']) +" %" : null))
 
@@ -97,7 +100,7 @@ class StackedBarChart extends React.Component {
         svg.append("g")
             .call(yAxis);
 
-        const legend_svg = d3.select("#legend")
+        const legend_svg = d3.select("#legend2")
         // Handmade legend
         legend_svg.append("circle").attr("cx",width/2-10).attr("cy",15).attr("r", 6).style("fill", "#b20710")
         legend_svg.append("circle").attr("cx",width/2-10).attr("cy",30).attr("r", 6).style("fill", "#221f1f")
@@ -117,4 +120,4 @@ class StackedBarChart extends React.Component {
     }
 }
 
-export default StackedBarChart;
+export default NormalizedStackedBarChart;

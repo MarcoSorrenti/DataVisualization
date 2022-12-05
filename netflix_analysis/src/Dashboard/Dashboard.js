@@ -26,16 +26,26 @@ import WordcloudChart from './Components/WordcloudChart';
 import SunburstZoomableChart from './Components/SunburstZoomableChart';
 import BarChart from './Components/BarChart';
 import StackedBarChart from './Components/StackedBarChart';
-
+import NormalizedStackedBarChart from './Components/NormalizedStackedBarChart';
 
 import netflix_data from '../data/Netflix_cleaned.csv';
 
-// TEST IMPORT
-import json from "./Components/data";
-import alpha_data from "./Components/alphabet.csv";
-import dream from "./Components/dream.txt";
-import stacked_data from "./Components/propData.csv";
+//DATA
+import netflix_title from './Components/data/netflix_title.png';
 
+import netflix_content_info from "./Components/data/netflix_content_info.csv";
+import netflix_year_info from "./Components/data/netflix_year_info.csv";
+import netflix_ratings_info from "./Components/data/netflix_ratings_info.csv";
+import netflix_countries_info from "./Components/data/netflix_countries_info.csv";
+import netflix_countries_genre_info from "./Components/data/netflix_countries_genre_info.csv";
+
+import netflix_text_title from "./Components/data/text_title.txt";
+import netflix_text_description from "./Components/data/text_description.txt";
+import netflix_text_genre from "./Components/data/text_genre.txt";
+
+// TEST IMPORT
+import json from "./Components/data";                               // sunburstZoom
+import dream from "./Components/dream.txt"; 
 
 class Dashboard extends React.Component {
     constructor(props) {
@@ -45,11 +55,18 @@ class Dashboard extends React.Component {
             type: null,
             category: null,
             openStatsInfo: false,
-            test_data: json,
-            alpha_data: null,
+            netflix_content_info: false,
+            netflix_year_info: false,
+            netflix_ratings_info: false,
+            netflix_countries_info: false,
+            netflix_countries_genre_info: false,
+            netflix_text_title_txt: fetch(netflix_text_title).then(r => r.text()).then(text => { this.state.netflix_text_title_txt = text }),
+            netflix_text_description_txt: fetch(netflix_text_description).then(r => r.text()).then(text => { this.state.netflix_text_description_txt = text }),
+            netflix_text_genre_txt: fetch(netflix_text_genre).then(r => r.text()).then(text => { this.state.netflix_text_genre_txt = text }),
+            max_words: 150,
+
             dream_text: fetch(dream).then(r => r.text()).then(text => { this.state.dream_text = text }),
-            stacked_data: null,
-            max_words: 150
+            test_data: json
         };
 
         this.handleOpenStatsInfo = this.handleOpenStatsInfo.bind(this);
@@ -80,20 +97,43 @@ class Dashboard extends React.Component {
     }
 
     loadCSV2 = async () => {
-        const d = await csv(alpha_data, function (d) {
-            return {
-                letter: d.letter,
-                frequency: d.frequency
-            };
-        })
-
-        this.setState({ alpha_data: d });
+        const d = await fetch(netflix_content_info).then(r => r.text())
+        this.setState({ netflix_content_info: d });
     }
 
     loadCSV3 = async () => {
-        //const d = await csv(stacked_data)
-        const d = await fetch(stacked_data).then(r => r.text())
-        this.setState({ stacked_data: d });
+        const d = await csv(netflix_year_info, function (d) {
+            return {
+                letter: d.year,
+                frequency: parseInt(d.count)
+            };
+        })
+        this.setState({ netflix_year_info: d });
+    }
+
+    loadCSV4 = async () => {
+        const d = await csv(netflix_ratings_info, function (d) {
+            return {
+                letter: d.rating,
+                frequency: parseInt(d.count)
+            };
+        })
+        this.setState({ netflix_ratings_info: d });
+    }
+
+    loadCSV5 = async () => {
+        const d = await csv(netflix_countries_info, function (d) {
+            return {
+                letter: d.country,
+                frequency: parseInt(d.count)
+            };
+        })
+        this.setState({ netflix_countries_info: d });
+    }
+
+    loadCSV6 = async () => {
+        const d = await fetch(netflix_countries_genre_info).then(r => r.text())
+        this.setState({ netflix_countries_genre_info: d });
     }
 
     handleOpenStatsInfo() {
@@ -108,6 +148,9 @@ class Dashboard extends React.Component {
         this.loadCSV();
         this.loadCSV2();
         this.loadCSV3();
+        this.loadCSV4();
+        this.loadCSV5();
+        this.loadCSV6();
     }
 
     render() {
@@ -120,9 +163,8 @@ class Dashboard extends React.Component {
                     <Grid container spacing={5} flexDirection='row'>
 
                         {/* Selection of the dataset */}
-                        <Grid item xs={12} md={6} lg={6}>
+                        {/*<Grid item xs={12} md={6} lg={6}>
                             <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column', alignItems: 'center', }}>
-
                                 <Grid container spacing={2}>
                                     <Grid item xs={12} sm container>
                                         <Grid item xs direction="column" spacing={2}>
@@ -168,21 +210,21 @@ class Dashboard extends React.Component {
                                     </Grid>
                                 </Grid>
                             </Paper>
-                        </Grid>
+                        </Grid>*/}
 
                         {/* Dataset Info */}
-                        <Grid item xs={12} md={6} lg={6}>
+                        <Grid item xs={12} md={12} lg={12}>
                             <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column', alignItems: 'center', }}>
                                 <Stack direction="row" justifyContent="center-end" alignItems='center' spacing={1}>
                                     <IconButton aria-label="info-stat" aria-controls="info-data" aria-haspopup="true" size='large' onClick={this.handleOpenStatsInfo}>
                                         <InfoIcon sx={{ color: 'background.contrastText', fontSize: 15 }} />
                                     </IconButton>
                                     <DatasetInfoDialog open={this.state.openStatsInfo} handleClose={this.handleCloseStatsInfo} />
-                                    <Typography variant="h5"> Dataset Information </Typography>
+                                    <Typography variant="h5"> Netflix Contents Information </Typography>
                                 </Stack>
                                 <DatasetInfo data={this.state.netflix_data} type={this.state.type} category={this.state.category} />
                                 <svg id="legend" height={40} width={450} />
-                                <StackedBarChart data={this.state.stacked_data}/>
+                                <StackedBarChart data={this.state.netflix_content_info} />
                             </Paper>
                         </Grid>
 
@@ -226,20 +268,106 @@ class Dashboard extends React.Component {
                         </Grid>*/}
                         <Grid item xs={12} md={12} lg={12}>
                             <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+                                <Typography variant="h5"> Netflix: Categories </Typography>
                                 <SunburstZoomableChart data={this.state.test_data} size={600} />
                             </Paper>
                         </Grid>
-                        <Grid item xs={12} md={12} lg={12}>
+                        <Grid item xs={12} md={6} lg={6}>
                             <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-                                <BarChart data={this.state.alpha_data} size={500} />
+                                <Typography variant="h5"> Netflix: Release Year </Typography>
+                                <BarChart data={this.state.netflix_year_info} size={500} />
                             </Paper>
                         </Grid>
-                        <Grid item xs={12} md={12} lg={12}>
+                        <Grid item xs={12} md={6} lg={6}>
                             <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-                                <Slider defaultValue={this.state.max_words} aria-label="Default" valueLabelDisplay="auto" step={10} min={50} max={300} onChange={(event) => { this.setState({ max_words: event.target.value }) }} />
+                                <Typography variant="h5"> Netflix: Ratings </Typography>
+                                <BarChart data={this.state.netflix_ratings_info} size={500} />
+                            </Paper>
+                        </Grid>
+                        <Grid item xs={12} md={6} lg={6}>
+                            <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+                                <Typography variant="h5"> Netflix: Countries </Typography>
+                                <BarChart data={this.state.netflix_countries_info} size={500} />
+                            </Paper>
+                        </Grid>
+                        <Grid item xs={12} md={6} lg={6}>
+                            <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+                                <Typography variant="h5"> Netflix: Coutries divided by TVs and Movies </Typography>
+                                <svg id="legend2" height={40} width={450} />
+                                <NormalizedStackedBarChart data={this.state.netflix_countries_genre_info} />
+                            </Paper>
+                        </Grid>
+                        <Grid item xs={12} md={4} lg={4}>
+                            <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+                                <Typography variant="h5"> Netflix: Wordcloud for Titles  </Typography>
+                                <img src={netflix_title} />
+                            </Paper>
+                        </Grid>
+                        <Grid item xs={12} md={8} lg={8}>
+                            <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+                                <Typography variant="h5"> Netflix: Wordcloud for Descriptions  </Typography>
+                                <Grid container spacing={2}>
+                                    <Grid item xs={12} sm container>
+                                        <Grid item xs={2} spacing={2}>
+                                            <Typography variant="h7"> Max Words: </Typography>
+                                        </Grid>
+                                        <Grid item xs={10}>
+                                            <Slider defaultValue={this.state.max_words} aria-label="Default" valueLabelDisplay="auto" step={10} min={50} max={300} onChange={(event) => { this.setState({ max_words: event.target.value }) }} />
+                                        </Grid>
+                                    </Grid>
+                                </Grid>
+                                <WordcloudChart data={this.state.netflix_text_description_txt} max_words={this.state.max_words} />
+                            </Paper>
+                        </Grid>
+                        {/*<Grid item xs={12} md={12} lg={12}>
+                            <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+                                <Typography variant="h5"> Netflix: Wordcloud DREAM  </Typography>
+                                <Grid container spacing={2}>
+                                    <Grid item xs={12} sm container>
+                                        <Grid item xs={2} spacing={2}>
+                                            <Typography variant="h7"> Max Words: </Typography>
+                                        </Grid>
+                                        <Grid item xs={10}>
+                                            <Slider defaultValue={this.state.max_words} aria-label="Default" valueLabelDisplay="auto" step={10} min={50} max={300} onChange={(event2) => { this.setState({ max_words: event2.target.value }) }} />
+                                        </Grid>
+                                    </Grid>
+                                </Grid>
                                 <WordcloudChart data={this.state.dream_text} max_words={this.state.max_words} />
                             </Paper>
                         </Grid>
+                        <Grid item xs={12} md={12} lg={12}>
+                            <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+                                <Typography variant="h5"> Netflix: Wordcloud for Descriptions  </Typography>
+                                <Grid container spacing={2}>
+                                    <Grid item xs={12} sm container>
+                                        <Grid item xs={2} spacing={2}>
+                                            <Typography variant="h7"> Max Words: </Typography>
+                                        </Grid>
+                                        <Grid item xs={10}>
+                                            <Slider defaultValue={this.state.max_words} aria-label="Default" valueLabelDisplay="auto" step={10} min={50} max={300} onChange={(event) => { this.setState({ max_words: event.target.value }) }} />
+                                        </Grid>
+                                    </Grid>
+                                </Grid>
+                                <WordcloudChart data={this.state.netflix_text_description_txt} max_words={this.state.max_words} />
+                            </Paper>
+                        </Grid>
+                        <Grid item xs={12} md={12} lg={12}>
+                            <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+                                <Typography variant="h5"> Netflix: Wordcloud for Genres  </Typography>
+                                <Grid container spacing={2}>
+                                    <Grid item xs={12} sm container>
+                                        <Grid item xs={2} spacing={2}>
+                                            <Typography variant="h7"> Max Words: </Typography>
+                                        </Grid>
+                                        <Grid item xs={10}>
+                                            <Slider defaultValue={this.state.max_words} aria-label="Default" valueLabelDisplay="auto" step={10} min={50} max={300} onChange={(event) => { this.setState({ max_words: event.target.value }) }} />
+                                        </Grid>
+                                    </Grid>
+                                </Grid>
+                                <WordcloudChart data={this.state.netflix_text_genre_txt} max_words={this.state.max_words} />
+                            </Paper>
+                        </Grid>
+*/}
                     </Grid>
 
                 </Container>
