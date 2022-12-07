@@ -14,7 +14,7 @@ class Header extends React.Component {
         return (
             <header>
                 <Box sx={{ flexGrow: 1 }}>
-                    <AppBar position="static">
+                    <AppBar color='primary' position="static">
                         <Toolbar>
 
                             <BubbleChartIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />

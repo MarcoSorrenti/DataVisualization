@@ -10,6 +10,8 @@ import IconButton from '@mui/material/IconButton';
 import InfoIcon from '@mui/icons-material/InfoOutlined';
 import Slider from '@mui/material/Slider';
 
+import Image from 'mui-image'
+
 import ScrollTop from './Components/ScrollTop';
 import DatasetInfo from './Components/DatasetInfo';
 import DatasetInfoDialog from './Components/DatasetInfoDialog';
@@ -24,6 +26,10 @@ import netflix_data from '../data/Netflix_cleaned.csv';
 
 //DATA
 import netflix_title from './Components/data/netflix_title.png';
+import netflix_content_added_over_years from './Components/data/netflix_content_added_over_years.png';
+import netflix_content_added_over_years_cumulative from './Components/data/netflix_content_added_over_years_cumulative.png';
+import netflix_country_target from './Components/data/netflix_country_target.png';
+
 import netflix_content_info from "./Components/data/netflix_content_info.csv";
 import netflix_year_info from "./Components/data/netflix_year_info.csv";
 import netflix_ratings_info from "./Components/data/netflix_ratings_info.csv";
@@ -150,7 +156,7 @@ class Dashboard extends React.Component {
                             <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column', alignItems: 'center', }}>
                                 <Stack direction="row" justifyContent="center-end" alignItems='center' spacing={1}>
                                     <IconButton aria-label="info-stat" aria-controls="info-data" aria-haspopup="true" size='large' onClick={this.handleOpenStatsInfo}>
-                                        <InfoIcon sx={{ color: 'background.contrastText', fontSize: 15 }} />
+                                        <InfoIcon sx={{ color: 'primary', fontSize: 15 }} />
                                     </IconButton>
                                     <DatasetInfoDialog open={this.state.openStatsInfo} handleClose={this.handleCloseStatsInfo} />
                                     <Typography variant="h5"> Netflix Contents Information </Typography>
@@ -197,11 +203,32 @@ class Dashboard extends React.Component {
                                 <NormalizedStackedBarChart data={this.state.netflix_countries_genre_info} />
                             </Paper>
                         </Grid>
+                        {/* Graph: content added over years */}
+                        <Grid item xs={12} md={6} lg={6}>
+                            <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+                                <Typography variant="h5"> Netflix: contents added over years  </Typography>
+                                <Image src={netflix_content_added_over_years} />
+                            </Paper>
+                        </Grid>
+                        {/* Graph: content added over years (cumulative) */}
+                        <Grid item xs={12} md={6} lg={6}>
+                            <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+                                <Typography variant="h5"> Netflix: contents added over years [Cumulative]  </Typography>
+                                <Image src={netflix_content_added_over_years_cumulative} />
+                            </Paper>
+                        </Grid>
+                        {/* Graph: target per country */}
+                        <Grid item xs={12} md={12} lg={12}>
+                            <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+                                <Typography variant="h5"> Netflix: target per country  </Typography>
+                                <Image src={netflix_country_target} />
+                            </Paper>
+                        </Grid>
                         {/* Wordcloud: for title + mask */}
                         <Grid item xs={12} md={4} lg={4}>
                             <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
                                 <Typography variant="h5"> Netflix: Wordcloud for Titles  </Typography>
-                                <img src={netflix_title} />
+                                <Image src={netflix_title} />
                             </Paper>
                         </Grid>
                         {/* Wordcloud: for descriptions*/}
