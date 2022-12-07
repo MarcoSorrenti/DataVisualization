@@ -8,15 +8,7 @@ import Paper from '@mui/material/Paper';
 import Stack from '@mui/material/Stack';
 import IconButton from '@mui/material/IconButton';
 import InfoIcon from '@mui/icons-material/InfoOutlined';
-import Radio from '@mui/material/Radio';
 import Slider from '@mui/material/Slider';
-import RadioGroup from '@mui/material/RadioGroup';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import FormControl from '@mui/material/FormControl';
-import FormLabel from '@mui/material/FormLabel';
-import InputLabel from '@mui/material/InputLabel';
-import MenuItem from '@mui/material/MenuItem';
-import Select from '@mui/material/Select';
 
 import ScrollTop from './Components/ScrollTop';
 import DatasetInfo from './Components/DatasetInfo';
@@ -32,20 +24,15 @@ import netflix_data from '../data/Netflix_cleaned.csv';
 
 //DATA
 import netflix_title from './Components/data/netflix_title.png';
-
 import netflix_content_info from "./Components/data/netflix_content_info.csv";
 import netflix_year_info from "./Components/data/netflix_year_info.csv";
 import netflix_ratings_info from "./Components/data/netflix_ratings_info.csv";
 import netflix_countries_info from "./Components/data/netflix_countries_info.csv";
 import netflix_countries_genre_info from "./Components/data/netflix_countries_genre_info.csv";
-
 import netflix_text_title from "./Components/data/text_title.txt";
 import netflix_text_description from "./Components/data/text_description.txt";
 import netflix_text_genre from "./Components/data/text_genre.txt";
-
-// TEST IMPORT
-import json from "./Components/data";                               // sunburstZoom
-import dream from "./Components/dream.txt"; 
+import netflix_categories_data from "./Components/data/netflix_sunburst_data";
 
 class Dashboard extends React.Component {
     constructor(props) {
@@ -64,9 +51,7 @@ class Dashboard extends React.Component {
             netflix_text_description_txt: fetch(netflix_text_description).then(r => r.text()).then(text => { this.state.netflix_text_description_txt = text }),
             netflix_text_genre_txt: fetch(netflix_text_genre).then(r => r.text()).then(text => { this.state.netflix_text_genre_txt = text }),
             max_words: 150,
-
-            dream_text: fetch(dream).then(r => r.text()).then(text => { this.state.dream_text = text }),
-            test_data: json
+            netflix_sunburst_data: netflix_categories_data
         };
 
         this.handleOpenStatsInfo = this.handleOpenStatsInfo.bind(this);
@@ -158,60 +143,8 @@ class Dashboard extends React.Component {
 
             <body>
                 <Container display='flex' maxWidth="lg" sx={{ mt: 4, mb: 4, minHeight: '100vh' }}>
-
                     <ScrollTop />
                     <Grid container spacing={5} flexDirection='row'>
-
-                        {/* Selection of the dataset */}
-                        {/*<Grid item xs={12} md={6} lg={6}>
-                            <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column', alignItems: 'center', }}>
-                                <Grid container spacing={2}>
-                                    <Grid item xs={12} sm container>
-                                        <Grid item xs direction="column" spacing={2}>
-                                            <FormControl>
-                                                <FormLabel id="dataset-selection-form">Select Dataset</FormLabel>
-                                                <RadioGroup
-                                                    aria-labelledby="dataset-selection-form"
-                                                    name="dataset-selection-group"
-                                                    value={this.state.type ? this.state.type : null}
-                                                    onChange={(event) => {
-                                                        this.setState({ type: event.target.value, category: null });
-                                                    }}
-                                                >
-                                                    <FormControlLabel value={null} control={<Radio />} label="All Netflix contents " />
-                                                    <FormControlLabel value={'TV Show'} control={<Radio />} label="TV Shows" />
-                                                    <FormControlLabel value={'Movie'} control={<Radio />} label="Movies" />
-                                                </RadioGroup>
-                                            </FormControl>
-                                        </Grid>
-                                        <Grid item>
-                                            <FormControl color='background' sx={{ m: 1, width: { xs: 80, sm: 150, md: 200 } }}>
-                                                <InputLabel> Category </InputLabel>
-                                                <Select
-                                                    id='select-category'
-                                                    label='Category'
-                                                    value={this.state.category ? this.state.category : null}
-                                                    onChange={(event) => {
-                                                        this.setState({ category: event.target.value })
-                                                    }}
-                                                >
-                                                    <MenuItem value={null}> All </MenuItem>
-                                                    {this.state.netflix_data ? this.state.netflix_data.filter(d => this.state.type ? d.type === this.state.type : true)
-                                                        .map(d => d.listed_in).flat()
-                                                        .filter((value, index, self) => self.indexOf(value) === index).sort()
-                                                        .map(filteredData => (
-                                                            <MenuItem value={filteredData}>
-                                                                {filteredData}
-                                                            </MenuItem>
-                                                        )) : null}
-                                                </Select>
-                                            </FormControl>
-                                        </Grid>
-                                    </Grid>
-                                </Grid>
-                            </Paper>
-                        </Grid>*/}
-
                         {/* Dataset Info */}
                         <Grid item xs={12} md={12} lg={12}>
                             <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column', alignItems: 'center', }}>
@@ -227,69 +160,36 @@ class Dashboard extends React.Component {
                                 <StackedBarChart data={this.state.netflix_content_info} />
                             </Paper>
                         </Grid>
-
-
-                        {/*  
-                        <Grid item xs={12} md={8} lg={8}>
-                            <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column', alignItems: 'center', }}>
-                                <DonutChart data={this.state.test}/>
-                            </Paper>
-                        </Grid>
-                    
-                        <Grid item xs={12} md={4} lg={4}>
-                            <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column', alignItems: 'center', }}>
-                                <Typography variant="h5"> Test </Typography>
-                                <Pie data={this.state.test} width={200} height={200} innerRadius={60} outerRadius={100}/>
-                            </Paper>
-                        </Grid>
-
-                        <Grid item xs={12} md={8} lg={8}>
-                            <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column', alignItems: 'center', }}>
-                                prova 1
-                            </Paper>
-                        </Grid>
-
-                        <Grid item xs={12} md={4} lg={4}>
-                            <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column', alignItems: 'center', }}>
-                                prova 2
-                            </Paper>
-                        </Grid>
-
-                        <Grid item xs={12} md={6} lg={6}>
-                            <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-                                prova 3
-                            </Paper>
-                        </Grid>
-                        */}
-                        {/* <Grid item xs={12} md={12} lg={12}>
-                            <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-                                <SunburstChart data={this.state.test_data} size={500}/>                                
-                            </Paper>
-                        </Grid>*/}
+                        {/* SunburstZoomableChart: Dataset Info */}
                         <Grid item xs={12} md={12} lg={12}>
                             <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
                                 <Typography variant="h5"> Netflix: Categories </Typography>
-                                <SunburstZoomableChart data={this.state.test_data} size={600} />
+                                {/*<SunburstZoomableChart data={this.state.test_data} size={600} />*/}
+                                <SunburstZoomableChart data={this.state.netflix_sunburst_data} size={600} />
                             </Paper>
                         </Grid>
+                        {/* BarChart: Dataset Info */}
                         <Grid item xs={12} md={6} lg={6}>
                             <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
                                 <Typography variant="h5"> Netflix: Release Year </Typography>
                                 <BarChart data={this.state.netflix_year_info} size={500} />
                             </Paper>
                         </Grid>
+                        {/* BarChart: Dataset Info */}
                         <Grid item xs={12} md={6} lg={6}>
                             <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
                                 <Typography variant="h5"> Netflix: Ratings </Typography>
                                 <BarChart data={this.state.netflix_ratings_info} size={500} />
                             </Paper>
                         </Grid>
+                        {/* BarChart: Dataset Info */}
                         <Grid item xs={12} md={6} lg={6}>
                             <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
                                 <Typography variant="h5"> Netflix: Countries </Typography>
                                 <BarChart data={this.state.netflix_countries_info} size={500} />
                             </Paper>
                         </Grid>
+                        {/* NormalizedStackedBarChart: Dataset Info */}
                         <Grid item xs={12} md={6} lg={6}>
                             <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
                                 <Typography variant="h5"> Netflix: Coutries divided by TVs and Movies </Typography>
@@ -297,12 +197,14 @@ class Dashboard extends React.Component {
                                 <NormalizedStackedBarChart data={this.state.netflix_countries_genre_info} />
                             </Paper>
                         </Grid>
+                        {/* Wordcloud: for title + mask */}
                         <Grid item xs={12} md={4} lg={4}>
                             <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
                                 <Typography variant="h5"> Netflix: Wordcloud for Titles  </Typography>
                                 <img src={netflix_title} />
                             </Paper>
                         </Grid>
+                        {/* Wordcloud: for descriptions*/}
                         <Grid item xs={12} md={8} lg={8}>
                             <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
                                 <Typography variant="h5"> Netflix: Wordcloud for Descriptions  </Typography>
@@ -319,55 +221,6 @@ class Dashboard extends React.Component {
                                 <WordcloudChart data={this.state.netflix_text_description_txt} max_words={this.state.max_words} />
                             </Paper>
                         </Grid>
-                        {/*<Grid item xs={12} md={12} lg={12}>
-                            <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-                                <Typography variant="h5"> Netflix: Wordcloud DREAM  </Typography>
-                                <Grid container spacing={2}>
-                                    <Grid item xs={12} sm container>
-                                        <Grid item xs={2} spacing={2}>
-                                            <Typography variant="h7"> Max Words: </Typography>
-                                        </Grid>
-                                        <Grid item xs={10}>
-                                            <Slider defaultValue={this.state.max_words} aria-label="Default" valueLabelDisplay="auto" step={10} min={50} max={300} onChange={(event2) => { this.setState({ max_words: event2.target.value }) }} />
-                                        </Grid>
-                                    </Grid>
-                                </Grid>
-                                <WordcloudChart data={this.state.dream_text} max_words={this.state.max_words} />
-                            </Paper>
-                        </Grid>
-                        <Grid item xs={12} md={12} lg={12}>
-                            <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-                                <Typography variant="h5"> Netflix: Wordcloud for Descriptions  </Typography>
-                                <Grid container spacing={2}>
-                                    <Grid item xs={12} sm container>
-                                        <Grid item xs={2} spacing={2}>
-                                            <Typography variant="h7"> Max Words: </Typography>
-                                        </Grid>
-                                        <Grid item xs={10}>
-                                            <Slider defaultValue={this.state.max_words} aria-label="Default" valueLabelDisplay="auto" step={10} min={50} max={300} onChange={(event) => { this.setState({ max_words: event.target.value }) }} />
-                                        </Grid>
-                                    </Grid>
-                                </Grid>
-                                <WordcloudChart data={this.state.netflix_text_description_txt} max_words={this.state.max_words} />
-                            </Paper>
-                        </Grid>
-                        <Grid item xs={12} md={12} lg={12}>
-                            <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-                                <Typography variant="h5"> Netflix: Wordcloud for Genres  </Typography>
-                                <Grid container spacing={2}>
-                                    <Grid item xs={12} sm container>
-                                        <Grid item xs={2} spacing={2}>
-                                            <Typography variant="h7"> Max Words: </Typography>
-                                        </Grid>
-                                        <Grid item xs={10}>
-                                            <Slider defaultValue={this.state.max_words} aria-label="Default" valueLabelDisplay="auto" step={10} min={50} max={300} onChange={(event) => { this.setState({ max_words: event.target.value }) }} />
-                                        </Grid>
-                                    </Grid>
-                                </Grid>
-                                <WordcloudChart data={this.state.netflix_text_genre_txt} max_words={this.state.max_words} />
-                            </Paper>
-                        </Grid>
-*/}
                     </Grid>
 
                 </Container>
