@@ -26,7 +26,7 @@ class StackedBarChart extends React.Component {
 
         const margin = { top: 10, right: 0, bottom: 10, left: 15 }
         const width = 450 - margin.left - margin.right
-        const height = width / 3 - margin.top - margin.bottom
+        const height = width / 4 - margin.top - margin.bottom
 
         clean();
 
@@ -85,7 +85,7 @@ class StackedBarChart extends React.Component {
             .join("text")
             .attr("transform", (d, i) => `translate(${x((d[0] + d[1]) / 2)},${y(d.data.name) + y.bandwidth()})`)
             .call(text => text.append("tspan")
-                .attr("y", "-1.1em")
+                .attr("y", "-0.55em")
                 .attr("font-weight", "bolder")
                 .attr("font-size", 30)
                 .attr("fill", "white")
@@ -99,8 +99,8 @@ class StackedBarChart extends React.Component {
 
         const legend_svg = d3.select("#legend")
         // Handmade legend
-        legend_svg.append("circle").attr("cx",width/2-10).attr("cy",15).attr("r", 6).style("fill", "#b20710")
-        legend_svg.append("circle").attr("cx",width/2-10).attr("cy",30).attr("r", 6).style("fill", "#221f1f")
+        legend_svg.append("circle").attr("cx",width/2-10).attr("cy",15).attr("r", 6).style("fill", "#221f1f")
+        legend_svg.append("circle").attr("cx",width/2-10).attr("cy",30).attr("r", 6).style("fill", "#b20710")
         legend_svg.append("text").attr("x", width/2).attr("y", 15).text("Movies").style("font-size", "15px").attr("alignment-baseline","middle")
         legend_svg.append("text").attr("x", width/2).attr("y", 30).text("Tv Series").style("font-size", "15px").attr("alignment-baseline","middle")
 

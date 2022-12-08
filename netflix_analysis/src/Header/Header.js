@@ -22,8 +22,8 @@ class Header extends React.Component {
                                 Netflix Analysis
                             </Typography>
 
-                            <Button color="inherit" startIcon={<GitHubIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />}>Source Code </Button>
-                            <Button color="inherit" startIcon={<InfoIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />}>About Me </Button>
+                            <Button target="_blank" href="https://github.com/MarcoSorrenti/DataVisualization" color="inherit" startIcon={<GitHubIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />}>Source Code </Button>
+                            <Button target="_blank" href="https://www.linkedin.com/in/marco-sorrenti/" color="inherit" startIcon={<InfoIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />}>About Me </Button>
 
                         </Toolbar>
                     </AppBar>

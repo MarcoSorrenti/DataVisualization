@@ -36,8 +36,7 @@ class SunburstZoomableChart extends React.Component {
                 .size([2 * Math.PI, root.height + 1])
                 (root);
         }
-        const color = d3.scaleOrdinal(d3.quantize(d3.interpolateRainbow, this.props.data.children.length + 1));
-
+        const color = d3.scaleOrdinal(d3.quantize(d3.interpolateSinebow, this.props.data.children.length + 1));
         const format = d3.format(",d");
 
         const arc = d3.arc()

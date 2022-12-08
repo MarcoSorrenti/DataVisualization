@@ -33,7 +33,7 @@ class App extends React.Component {
 
   render() {
     return (
-      <div>
+      <div style={{ background: '#f5f5f1' }}>
         <ThemeProvider theme={theme}>
           <Header />
           <Dashboard />

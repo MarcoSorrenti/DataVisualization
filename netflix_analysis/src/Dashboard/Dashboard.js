@@ -170,37 +170,28 @@ class Dashboard extends React.Component {
                         <Grid item xs={12} md={12} lg={12}>
                             <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
                                 <Typography variant="h5"> Netflix: Categories </Typography>
-                                {/*<SunburstZoomableChart data={this.state.test_data} size={600} />*/}
                                 <SunburstZoomableChart data={this.state.netflix_sunburst_data} size={600} />
                             </Paper>
                         </Grid>
-                        {/* BarChart: Dataset Info */}
-                        <Grid item xs={12} md={6} lg={6}>
-                            <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-                                <Typography variant="h5"> Netflix: Release Year </Typography>
-                                <BarChart data={this.state.netflix_year_info} size={500} />
-                            </Paper>
-                        </Grid>
-                        {/* BarChart: Dataset Info */}
-                        <Grid item xs={12} md={6} lg={6}>
+                        {/* BarChart: Ratings */}
+                        <Grid item xs={12} md={4} lg={4}>
                             <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
                                 <Typography variant="h5"> Netflix: Ratings </Typography>
-                                <BarChart data={this.state.netflix_ratings_info} size={500} />
+                                <BarChart data={this.state.netflix_ratings_info} size={500} color={'#221f1f'}/>
                             </Paper>
                         </Grid>
-                        {/* BarChart: Dataset Info */}
-                        <Grid item xs={12} md={6} lg={6}>
+                        {/* BarChart: Release years */}
+                        <Grid item xs={12} md={4} lg={4}>
+                            <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+                                <Typography variant="h5"> Netflix: Release Year </Typography>
+                                <BarChart data={this.state.netflix_year_info} size={500} color={'#b20710'}/>
+                            </Paper>
+                        </Grid>
+                        {/* BarChart: Countries */}
+                        <Grid item xs={12} md={4} lg={4}>
                             <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
                                 <Typography variant="h5"> Netflix: Countries </Typography>
-                                <BarChart data={this.state.netflix_countries_info} size={500} />
-                            </Paper>
-                        </Grid>
-                        {/* NormalizedStackedBarChart: Dataset Info */}
-                        <Grid item xs={12} md={6} lg={6}>
-                            <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-                                <Typography variant="h5"> Netflix: Coutries divided by TVs and Movies </Typography>
-                                <svg id="legend2" height={40} width={450} />
-                                <NormalizedStackedBarChart data={this.state.netflix_countries_genre_info} />
+                                <BarChart data={this.state.netflix_countries_info} size={500} color={'#e50914'}/>
                             </Paper>
                         </Grid>
                         {/* Graph: content added over years */}
@@ -217,8 +208,16 @@ class Dashboard extends React.Component {
                                 <Image src={netflix_content_added_over_years_cumulative} />
                             </Paper>
                         </Grid>
+                        {/* NormalizedStackedBarChart: Dataset Info */}
+                        <Grid item xs={12} md={4} lg={4}>
+                            <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+                                <Typography variant="h5"> Netflix: Coutries divided by TVs and Movies </Typography>
+                                <svg id="legend2" height={40} width={450} />
+                                <NormalizedStackedBarChart data={this.state.netflix_countries_genre_info} />
+                            </Paper>
+                        </Grid>
                         {/* Graph: target per country */}
-                        <Grid item xs={12} md={12} lg={12}>
+                        <Grid item xs={12} md={8} lg={8}>
                             <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
                                 <Typography variant="h5"> Netflix: target per country  </Typography>
                                 <Image src={netflix_country_target} />

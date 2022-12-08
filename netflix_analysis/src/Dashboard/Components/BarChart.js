@@ -9,7 +9,8 @@ class BarChart extends React.Component {
         this.state = {
             ref: React.createRef(),
             width: this.props.size,
-            height: this.props.size * 2 / 3
+            height: this.props.size * 2 / 3,
+            color: this.props.color
         }
         this.createBarChart = this.createBarChart.bind(this)
     }
@@ -29,6 +30,7 @@ class BarChart extends React.Component {
         const margin = { top: 20, right: 0, bottom: 30, left: 40 }
         const width = this.state.width
         const height = this.state.height
+        const color = this.state.color
 
         clean();
 
@@ -58,7 +60,7 @@ class BarChart extends React.Component {
 
         svg.append("g")
             .attr("class", "bars")
-            .attr("fill", "steelblue")
+            .attr("fill", color)
             .selectAll("rect")
             .data(data)
             .join("rect")
