@@ -47,7 +47,22 @@ class Dashboard extends React.Component {
             netflix_data: null,
             type: null,
             category: null,
-            openStatsInfo: false,
+
+            title: "",
+            text: "",
+
+            openStatsInfo: false, 
+            openCategInfo: false,
+            openRatingInfo: false,
+            openReleaseInfo: false,
+            openCountInfo: false,
+            openContentInfo: false,
+            openCumContentInfo: false,
+            openContentCountryInfo: false,
+            openTargetCountryInfo: false,
+            openWCTitleInfo: false,
+            openWCDescInfo: false,
+
             netflix_content_info: false,
             netflix_year_info: false,
             netflix_ratings_info: false,
@@ -62,6 +77,37 @@ class Dashboard extends React.Component {
 
         this.handleOpenStatsInfo = this.handleOpenStatsInfo.bind(this);
         this.handleCloseStatsInfo = this.handleCloseStatsInfo.bind(this);
+
+        this.handleOpenCategInfo = this.handleOpenCategInfo.bind(this);
+        this.handleCloseCategInfo = this.handleCloseCategInfo.bind(this);
+
+        this.handleOpenRatingInfo = this.handleOpenRatingInfo.bind(this);
+        this.handleCloseRatingInfo = this.handleCloseRatingInfo.bind(this);
+
+        this.handleOpenReleaseInfo = this.handleOpenReleaseInfo.bind(this);
+        this.handleCloseReleaseInfo = this.handleCloseReleaseInfo.bind(this);
+
+        this.handleOpenCountInfo = this.handleOpenCountInfo.bind(this);
+        this.handleCloseCountInfo = this.handleCloseCountInfo.bind(this);
+
+        this.handleOpenContentInfo = this.handleOpenContentInfo.bind(this);
+        this.handleCloseContentInfo = this.handleCloseContentInfo.bind(this);
+
+        this.handleOpenCumContentInfo = this.handleOpenCumContentInfo.bind(this);
+        this.handleCloseCumContentInfo = this.handleCloseCumContentInfo.bind(this);
+
+        this.handleOpenContentCountryInfo = this.handleOpenContentCountryInfo.bind(this);
+        this.handleCloseContentCountryInfo = this.handleCloseContentCountryInfo.bind(this);
+
+        this.handleOpenTargetCountryInfo = this.handleOpenTargetCountryInfo.bind(this);
+        this.handleCloseTargetCountryInfo = this.handleCloseTargetCountryInfo.bind(this);
+
+        this.handleOpenWCTitleInfo = this.handleOpenWCTitleInfo.bind(this);
+        this.handleCloseWCTitleInfo = this.handleCloseWCTitleInfo.bind(this);
+
+        this.handleOpenWCDescInfo = this.handleOpenWCDescInfo.bind(this);
+        this.handleCloseWCDescInfo = this.handleCloseWCDescInfo.bind(this);
+
     }
 
     loadCSV = async () => {
@@ -128,11 +174,126 @@ class Dashboard extends React.Component {
     }
 
     handleOpenStatsInfo() {
-        this.setState({ openStatsInfo: true });
+        this.setState({ 
+            openStatsInfo: true,  
+            title: "Netflix Dataset Information",
+            text: "Total records is the total number of movies/TV Shows contents.\n This horizontal bar chart was created using the d3js library and shows what percentage of Netflix movies and TV shows are in the dataset."
+        });
     }
 
     handleCloseStatsInfo() {
-        this.setState({ openStatsInfo: false });
+        this.setState({openStatsInfo: false});
+    }
+
+    handleOpenCategInfo() {
+        this.setState({ 
+            openCategInfo: true,  
+            title: "Netflix Movies/TV Shows categories",
+            text: "This sunburst zoomable chart was created using the d3js library and allows you to select a TV Show / Movie based on the type of content, category and rating."
+        });
+    }
+
+    handleCloseCategInfo() {
+        this.setState({openCategInfo: false});
+    }
+
+    handleOpenRatingInfo() {
+        this.setState({ openRatingInfo: true ,  
+            title: "Netflix Ratings Bar Chart",
+            text: "This bar chart was created using the d3js library and it shows the amount of contents divided by their rating."
+        });
+    }
+
+    handleCloseRatingInfo() {
+        this.setState({ openRatingInfo: false });
+    }
+
+    handleOpenReleaseInfo() {
+        this.setState({ openReleaseInfo: true ,  
+            title: "Netflix Contents Release over years Bar Chart",
+            text: "This bar chart was created using the d3js library and it shows the amount of contents divided by their years release."
+        });
+    }
+
+    handleCloseReleaseInfo() {
+        this.setState({ openReleaseInfo: false });
+    }
+
+    handleOpenCountInfo() {
+        this.setState({ openCountInfo: true ,  
+            title: "Netflix Contents produced in countries Bar Chart",
+            text: "This bar chart was created using the d3js library and it shows the amount of contents produced in the top countries (ones that produced more contents)."
+        });
+    }
+
+    handleCloseCountInfo() {
+        this.setState({ openCountInfo: false });
+    }
+
+    handleOpenContentInfo() {
+        this.setState({ openContentInfo: true ,  
+            title: "Netflix TV Show/ Movies Release over years",
+            text: ""
+        });
+    }
+
+    handleCloseContentInfo() {
+        this.setState({ openContentInfo: false });
+    }
+
+    handleOpenCumContentInfo() {
+        this.setState({ openStatsInfo: true ,  
+            title: "Netflix TV Show/ Movies Release over years (cumulative)",
+            text: ""
+        });
+    }
+
+    handleCloseCumContentInfo() {
+        this.setState({ openCumContentInfo: false });
+    }
+
+    handleOpenContentCountryInfo() {
+        this.setState({ openContentCountryInfo: true ,  
+            title: "Netflix TV Show / Movies produced in top 5 countries",
+            text: ""
+        });
+    }
+
+    handleCloseContentCountryInfo() {
+        this.setState({ openContentCountryInfo: false });
+    }
+
+    handleOpenTargetCountryInfo() {
+        this.setState({ openTargetCountryInfo: true ,  
+            title: "Netflix correlation between Country and Target",
+            text: ""
+        });
+    }
+
+    handleCloseTargetCountryInfo() {
+        this.setState({ openTargetCountryInfo: false });
+    }
+
+    handleOpenWCTitleInfo() {
+        this.setState({ openWCTitleInfo: true ,  
+            title: "Netflix Wordcloud with contents Title",
+            text: ""
+        });
+    }
+
+    handleCloseWCTitleInfo() {
+        this.setState({ openWCTitleInfo: false });
+    }
+
+    handleOpenWCDescInfo() {
+        this.setState({ openWCDescInfo: true ,  
+            title: "Netflix Wordcloud with contents Descriptions",
+            text: ""
+        });
+    }
+
+    handleCloseWCDescInfo() {
+        this.setState({ openWCDescInfo: false });
     }
 
     componentDidMount() {
@@ -158,8 +319,8 @@ class Dashboard extends React.Component {
                                     <IconButton aria-label="info-stat" aria-controls="info-data" aria-haspopup="true" size='large' onClick={this.handleOpenStatsInfo}>
                                         <InfoIcon sx={{ color: 'primary', fontSize: 15 }} />
                                     </IconButton>
-                                    <DatasetInfoDialog open={this.state.openStatsInfo} handleClose={this.handleCloseStatsInfo} />
-                                    <Typography variant="h5"> Netflix Contents Information </Typography>
+                                    <DatasetInfoDialog title={this.state.title} text= {this.state.text} open={this.state.openStatsInfo} handleClose={this.handleCloseStatsInfo} />
+                                    <Typography variant="h5"> Netflix Dataset Information </Typography>
                                 </Stack>
                                 <DatasetInfo data={this.state.netflix_data} type={this.state.type} category={this.state.category} />
                                 <svg id="legend" height={40} width={450} />
@@ -169,49 +330,92 @@ class Dashboard extends React.Component {
                         {/* SunburstZoomableChart: Dataset Info */}
                         <Grid item xs={12} md={12} lg={12}>
                             <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-                                <Typography variant="h5"> Netflix: Categories </Typography>
+                                <Stack direction="row" justifyContent="center-end" alignItems='center' spacing={1}>
+                                    <IconButton aria-label="info-stat" aria-controls="info-data" aria-haspopup="true" size='large' onClick={this.handleOpenCategInfo}>
+                                        <InfoIcon sx={{ color: 'primary', fontSize: 15 }} />
+                                    </IconButton>
+                                    <DatasetInfoDialog title={this.state.title} text={this.state.text} open={this.state.openCategInfo} handleClose={this.handleCloseCategInfo} />
+                                    <Typography variant="h5"> Netflix Movies/TV Shows </Typography>
+                                </Stack>
                                 <SunburstZoomableChart data={this.state.netflix_sunburst_data} size={600} />
                             </Paper>
                         </Grid>
                         {/* BarChart: Ratings */}
                         <Grid item xs={12} md={4} lg={4}>
                             <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-                                <Typography variant="h5"> Netflix: Ratings </Typography>
-                                <BarChart data={this.state.netflix_ratings_info} size={500} color={'#221f1f'}/>
+                                <Stack direction="row" justifyContent="center-end" alignItems='center' spacing={1}>
+                                    <IconButton aria-label="info-stat" aria-controls="info-data" aria-haspopup="true" size='large' onClick={this.handleOpenRatingInfo}>
+                                        <InfoIcon sx={{ color: 'primary', fontSize: 15 }} />
+                                    </IconButton>
+                                    <DatasetInfoDialog title={this.state.title} text={this.state.text} open={this.state.openRatingInfo} handleClose={this.handleCloseRatingInfo} />
+                                    <Typography variant="h5"> Netflix Ratings </Typography>
+                                </Stack>
+                                <BarChart data={this.state.netflix_ratings_info} size={500} color={'#e50914'} legend={true}/>
                             </Paper>
                         </Grid>
                         {/* BarChart: Release years */}
                         <Grid item xs={12} md={4} lg={4}>
                             <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-                                <Typography variant="h5"> Netflix: Release Year </Typography>
-                                <BarChart data={this.state.netflix_year_info} size={500} color={'#b20710'}/>
+                                <Stack direction="row" justifyContent="center-end" alignItems='center' spacing={1}>
+                                    <IconButton aria-label="info-stat" aria-controls="info-data" aria-haspopup="true" size='large' onClick={this.handleOpenReleaseInfo}>
+                                        <InfoIcon sx={{ color: 'primary', fontSize: 15 }} />
+                                    </IconButton>
+                                    <DatasetInfoDialog title={this.state.title} text={this.state.text} open={this.state.openReleaseInfo} handleClose={this.handleCloseReleaseInfo} />
+                                    <Typography variant="h5"> Netflix Contents Release </Typography>
+                                </Stack>
+                                <BarChart data={this.state.netflix_year_info} size={500} color={'#b20710'} legend={false}/>
                             </Paper>
                         </Grid>
                         {/* BarChart: Countries */}
                         <Grid item xs={12} md={4} lg={4}>
                             <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-                                <Typography variant="h5"> Netflix: Countries </Typography>
-                                <BarChart data={this.state.netflix_countries_info} size={500} color={'#e50914'}/>
+
+                                <Stack direction="row" justifyContent="center-end" alignItems='center' spacing={1}>
+                                    <IconButton aria-label="info-stat" aria-controls="info-data" aria-haspopup="true" size='large' onClick={this.handleOpenCountInfo}>
+                                        <InfoIcon sx={{ color: 'primary', fontSize: 15 }} />
+                                    </IconButton>
+                                    <DatasetInfoDialog title={this.state.title} text={this.state.text} open={this.state.openCountInfo} handleClose={this.handleCloseCountInfo} />
+                                    <Typography variant="h5"> Netflix coutries production </Typography>
+                                </Stack>
+                                <BarChart data={this.state.netflix_countries_info} size={500} color={'#e50914'} legend={false}/>
                             </Paper>
                         </Grid>
                         {/* Graph: content added over years */}
                         <Grid item xs={12} md={6} lg={6}>
                             <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-                                <Typography variant="h5"> Netflix: contents added over years  </Typography>
+                                <Stack direction="row" justifyContent="center-end" alignItems='center' spacing={1}>
+                                    <IconButton aria-label="info-stat" aria-controls="info-data" aria-haspopup="true" size='large' onClick={this.handleOpenContentInfo}>
+                                        <InfoIcon sx={{ color: 'primary', fontSize: 15 }} />
+                                    </IconButton>
+                                    <DatasetInfoDialog title={this.state.title} text={this.state.text} open={this.state.openContentInfo} handleClose={this.handleCloseContentInfo} />
+                                    <Typography variant="h5"> Netflix: contents added over years  </Typography>
+                                </Stack>
                                 <Image src={netflix_content_added_over_years} />
                             </Paper>
                         </Grid>
                         {/* Graph: content added over years (cumulative) */}
                         <Grid item xs={12} md={6} lg={6}>
                             <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-                                <Typography variant="h5"> Netflix: contents added over years [Cumulative]  </Typography>
+                                <Stack direction="row" justifyContent="center-end" alignItems='center' spacing={1}>
+                                    <IconButton aria-label="info-stat" aria-controls="info-data" aria-haspopup="true" size='large' onClick={this.handleOpenCumContentInfo}>
+                                        <InfoIcon sx={{ color: 'primary', fontSize: 15 }} />
+                                    </IconButton>
+                                    <DatasetInfoDialog title={this.state.title} text={this.state.text} open={this.state.openCumContentInfo} handleClose={this.handleCloseCumContentInfo} />
+                                    <Typography variant="h5"> Netflix: contents added over years [Cumulative]  </Typography>
+                                </Stack>
                                 <Image src={netflix_content_added_over_years_cumulative} />
                             </Paper>
                         </Grid>
                         {/* NormalizedStackedBarChart: Dataset Info */}
                         <Grid item xs={12} md={4} lg={4}>
                             <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-                                <Typography variant="h5"> Netflix: Coutries divided by TVs and Movies </Typography>
+                                <Stack direction="row" justifyContent="center-end" alignItems='center' spacing={1}>
+                                    <IconButton aria-label="info-stat" aria-controls="info-data" aria-haspopup="true" size='large' onClick={this.handleOpenContentCountryInfo}>
+                                        <InfoIcon sx={{ color: 'primary', fontSize: 15 }} />
+                                    </IconButton>
+                                    <DatasetInfoDialog title={this.state.title} text={this.state.text} open={this.state.openContentCountryInfo} handleClose={this.handleCloseContentCountryInfo} />
+                                    <Typography variant="h5"> Netflix: Coutries divided by TVs and Movies </Typography>
+                                </Stack>
                                 <svg id="legend2" height={40} width={450} />
                                 <NormalizedStackedBarChart data={this.state.netflix_countries_genre_info} />
                             </Paper>
@@ -219,21 +423,39 @@ class Dashboard extends React.Component {
                         {/* Graph: target per country */}
                         <Grid item xs={12} md={8} lg={8}>
                             <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-                                <Typography variant="h5"> Netflix: target per country  </Typography>
+                                <Stack direction="row" justifyContent="center-end" alignItems='center' spacing={1}>
+                                    <IconButton aria-label="info-stat" aria-controls="info-data" aria-haspopup="true" size='large' onClick={this.handleOpenTargetCountryInfo}>
+                                        <InfoIcon sx={{ color: 'primary', fontSize: 15 }} />
+                                    </IconButton>
+                                    <DatasetInfoDialog title={this.state.title} text={this.state.text} open={this.state.openTargetCountryInfo} handleClose={this.handleCloseTargetCountryInfo} />
+                                    <Typography variant="h5"> Netflix: target per country  </Typography>
+                                </Stack>
                                 <Image src={netflix_country_target} />
                             </Paper>
                         </Grid>
                         {/* Wordcloud: for title + mask */}
                         <Grid item xs={12} md={4} lg={4}>
                             <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-                                <Typography variant="h5"> Netflix: Wordcloud for Titles  </Typography>
+                                <Stack direction="row" justifyContent="center-end" alignItems='center' spacing={1}>
+                                    <IconButton aria-label="info-stat" aria-controls="info-data" aria-haspopup="true" size='large' onClick={this.handleOpenWCTitleInfo}>
+                                        <InfoIcon sx={{ color: 'primary', fontSize: 15 }} />
+                                    </IconButton>
+                                    <DatasetInfoDialog title={this.state.title} text={this.state.text} open={this.state.openWCTitleInfo} handleClose={this.handleCloseWCTitleInfo} />
+                                    <Typography variant="h5"> Netflix: Wordcloud for Titles  </Typography>
+                                </Stack>
                                 <Image src={netflix_title} />
                             </Paper>
                         </Grid>
                         {/* Wordcloud: for descriptions*/}
                         <Grid item xs={12} md={8} lg={8}>
                             <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-                                <Typography variant="h5"> Netflix: Wordcloud for Descriptions  </Typography>
+                                <Stack direction="row" justifyContent="center-end" alignItems='center' spacing={1}>
+                                    <IconButton aria-label="info-stat" aria-controls="info-data" aria-haspopup="true" size='large' onClick={this.handleOpenWCDescInfo}>
+                                        <InfoIcon sx={{ color: 'primary', fontSize: 15 }} />
+                                    </IconButton>
+                                    <DatasetInfoDialog title={this.state.title} text={this.state.text} open={this.state.openWCDescInfo} handleClose={this.handleCloseWCDescInfo} />
+                                    <Typography variant="h5"> Netflix: Wordcloud for Descriptions  </Typography>
+                                </Stack>
                                 <Grid container spacing={2}>
                                     <Grid item xs={12} sm container>
                                         <Grid item xs={2} spacing={2}>

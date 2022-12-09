@@ -10,7 +10,8 @@ class BarChart extends React.Component {
             ref: React.createRef(),
             width: this.props.size,
             height: this.props.size * 2 / 3,
-            color: this.props.color
+            color: this.props.color,
+            legend: this.props.legend
         }
         this.createBarChart = this.createBarChart.bind(this)
     }
@@ -76,6 +77,17 @@ class BarChart extends React.Component {
         svg.append("g")
             .attr("class", "y-axis")
             .call(yAxis);
+
+        if(this.state.legend){
+            const ratings = ['TV-PG: Older Kids', 'TV-MA: Adults', 'TV-Y7-FV: Older Kids', 'TV-Y7: Older Kids', 'TV-14: Teens', 'R: Adults', 'TV-Y: Kids', 'NR: Adults', 'PG-13: Teens', 'TV-G: Kids', 'PG: Older Kids', 'G: Kids', 'UR: Adults', 'NC-17: Adults']
+
+            ratings.forEach(function (r, i) {
+                svg.append("text")
+                    .text(r)
+                    .attr("x", 350)
+                    .attr("y", 15 + 18 * i);
+            });
+        }
 
         function clean() {
             d3.select(node).selectAll("*").remove()
