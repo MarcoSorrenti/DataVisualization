@@ -37,7 +37,7 @@ npm start
 ```
 
 ### Overview
-![gif](https://github.com/MarcoSorrenti/DataVisualization/blob/master/netflix_analysis/src/Dashboard/Components/data/overview.gif?raw=true)
+![gif](https://github.com/MarcoSorrenti/DataVisualization/blob/master/netflix_analysis/src/Dashboard/Components/data/overview.gif)
 
 ## Project built with
 ![Jupyter Notebook](https://img.shields.io/badge/jupyter-%23FA0F00.svg?style=for-the-badge&logo=jupyter&logoColor=white)
