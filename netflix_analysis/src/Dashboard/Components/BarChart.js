@@ -9,7 +9,7 @@ class BarChart extends React.Component {
         this.state = {
             ref: React.createRef(),
             width: this.props.size,
-            height: this.props.size * 2 / 3,
+            height: this.props.size * 2 / 3 + 60,
             color: this.props.color,
             legend: this.props.legend
         }
@@ -85,7 +85,7 @@ class BarChart extends React.Component {
                 svg.append("text")
                     .text(r)
                     .attr("x", 350)
-                    .attr("y", 15 + 18 * i);
+                    .attr("y", 22 + 18 * i);
             });
         }
 

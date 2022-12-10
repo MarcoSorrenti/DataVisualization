@@ -45,7 +45,7 @@ class StackedBarChart extends React.Component {
 
         const color = d3.scaleOrdinal()
             .domain(["F", "M"])
-            .range(["#221f1f","#b20710"])
+            .range(["#b20710","#221f1f"])
 
         const xAxis = g => g
             .attr("transform", `translate(0,${margin.top})`)
@@ -88,7 +88,7 @@ class StackedBarChart extends React.Component {
                 .attr("y", "-0.55em")
                 .attr("font-weight", "bolder")
                 .attr("font-size", 30)
-                .attr("fill", "white")
+                .attr("fill", "#f5f5f1")
                 .text(d => d.data[d.key] !== 0 ? Math.round(d.data[d.key]*100/d.data['total']) +" %" : null))
 
         svg.append("g")
@@ -99,8 +99,8 @@ class StackedBarChart extends React.Component {
 
         const legend_svg = d3.select("#legend")
         // Handmade legend
-        legend_svg.append("circle").attr("cx",width/2-10).attr("cy",15).attr("r", 6).style("fill", "#221f1f")
-        legend_svg.append("circle").attr("cx",width/2-10).attr("cy",30).attr("r", 6).style("fill", "#b20710")
+        legend_svg.append("circle").attr("cx",width/2-10).attr("cy",15).attr("r", 6).style("fill", "#b20710")
+        legend_svg.append("circle").attr("cx",width/2-10).attr("cy",30).attr("r", 6).style("fill", "#221f1f")
         legend_svg.append("text").attr("x", width/2).attr("y", 15).text("Movies").style("font-size", "15px").attr("alignment-baseline","middle")
         legend_svg.append("text").attr("x", width/2).attr("y", 30).text("Tv Series").style("font-size", "15px").attr("alignment-baseline","middle")
 

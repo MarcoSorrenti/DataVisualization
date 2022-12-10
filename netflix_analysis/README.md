@@ -1,70 +1,47 @@
-# Getting Started with Create React App
+# [Netflix Analytics and Data Visualization](https://marcosorrenti.github.io/DataVisualization/)
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Data Visualization project for the Scientific and Large Data Visualization exam, at the University of Pisa (2021/2022).
 
-## Available Scripts
+The website contains different data visualization made with [D3js](https://d3js.org/) and [matplotlib](https://matplotlib.org/) which allows to have an overview of the Netflix Dataset available on [Kaggle](https://www.kaggle.com/datasets/shivamb/netflix-shows).
 
-In the project directory, you can run:
+Live demo available [here](https://marcosorrenti.github.io/DataVisualization/).
 
-### `npm start`
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+# Data
+Every single information used for this analysis and visualization have been provided by [Kaggle](https://www.kaggle.com/datasets/shivamb/netflix-shows). This dataset is made up by 8807 entries with 12 features each:
+- `show_id`: Netflix ID of the media.
+- `type`: Movie or TV Show.
+- `title`: Title of the media.
+- `director`: Director of the media.
+- `cast`: Cast of the media.
+- `country`: Country in which the movie was made.
+- `date_added`: Date in which the media was added.
+- `release_year`: Year in which the media was released.
+- `rating`: Age rating of the media.
+- `duration`: Duration of the media.
+- `listen_in`: Classification given by Netflix.
+- `description`: A short description of the media.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+There are 6 features with missing values. However, since 3 of this have more than 9% of missing values I decided to handle them. The others records with missing values have been dropped. For more information on data preparation, please visit this [notebook](https://github.com/MarcoSorrenti/DataVisualization/blob/master/netflix_analysis/src/data/data_preparation.ipynb).
 
-### `npm test`
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+# How to use
+If you want to run this project locally, first of all you have to install [Node.js](https://nodejs.org/en/).
+Now you can clone this repository:
+```
+git clone https://github.com/MarcoSorrenti/DataVisualization.git
+```
+Run the project:
+```
+npm start
+```
 
-### `npm run build`
+### Overview
+![usage gif](https://github.com/MarcoSorrenti/DataVisualization/tree/master/netflix_analysis/src/Dashboard/Components/data/overview.gif?raw=true)
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+## Built with
+![Jupyter Notebook](https://img.shields.io/badge/jupyter-%23FA0F00.svg?style=for-the-badge&logo=jupyter&logoColor=white)
+![Python](https://img.shields.io/badge/python-3670A0?style=for-the-badge&logo=python&logoColor=ffdd54)
+![NodeJS](https://img.shields.io/badge/node.js-6DA55F?style=for-the-badge&logo=node.js&logoColor=white)
+![React](https://img.shields.io/badge/react-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB)
+![MUI](https://img.shields.io/badge/MUI-%230081CB.svg?style=for-the-badge&logo=mui&logoColor=white)

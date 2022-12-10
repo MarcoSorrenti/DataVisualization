@@ -26,7 +26,7 @@ class NormalizedStackedBarChart extends React.Component {
 
         const margin = { top: 5, right: 0, bottom: 0, left: 60 }
         const width = 450 - margin.left - margin.right
-        const height = width / 2 - margin.top - margin.bottom
+        const height = width / 2 - margin.top - margin.bottom + 73
 
         clean();
 
@@ -47,7 +47,7 @@ class NormalizedStackedBarChart extends React.Component {
 
         const color = d3.scaleOrdinal()
             .domain(["F", "M"])
-            .range(["#221f1f","#b20710"])
+            .range(["#b20710","#221f1f"])
 
         const xAxis = g => g
             .attr("transform", `translate(0,${margin.top})`)
@@ -88,7 +88,7 @@ class NormalizedStackedBarChart extends React.Component {
             .join("text")
             .attr("transform", (d, i) => `translate(${x((d[0] + d[1]) / 2)},${y(d.data.country) + y.bandwidth()})`)
             .call(text => text.append("tspan")
-                .attr("y", "-0.75em")
+                .attr("y", "-0.38em")
                 .attr("font-weight", "bolder")
                 .attr("font-size", 14)
                 .attr("fill", "white")
