@@ -1,27 +1,27 @@
 {
   "files": {
     "main.css": "/DataVisualization/static/css/main.e6c13ad2.css",
-    "main.js": "/DataVisualization/static/js/main.daa3c255.js",
+    "main.js": "/DataVisualization/static/js/main.df4abea7.js",
     "static/js/787.7afbd3a0.chunk.js": "/DataVisualization/static/js/787.7afbd3a0.chunk.js",
     "static/media/Netflix_cleaned.csv": "/DataVisualization/static/media/Netflix_cleaned.d8a6d5407dc34d57f5fd.csv",
     "static/media/text_description.txt": "/DataVisualization/static/media/text_description.f9c4411dd3fdb1217c72.txt",
-    "static/media/netflix_title.png": "/DataVisualization/static/media/netflix_title.2fd646adf98a8e27995c.png",
+    "static/media/text_title.txt": "/DataVisualization/static/media/text_title.aee8a7703981ac2a51d3.txt",
+    "static/media/netflix_title.png": "/DataVisualization/static/media/netflix_title.e1f884529f306062f89a.png",
     "static/media/text_genre.txt": "/DataVisualization/static/media/text_genre.0020f7b574619ad4f8df.txt",
-    "static/media/netflix_country_target.png": "/DataVisualization/static/media/netflix_country_target.6a97a3303c455dc92cad.png",
-    "static/media/netflix_content_added_over_years.png": "/DataVisualization/static/media/netflix_content_added_over_years.2a1f21a10c72ffba462e.png",
+    "static/media/netflix_country_target.png": "/DataVisualization/static/media/netflix_country_target.3a21a0a1e7c269d33de4.png",
+    "static/media/netflix_content_added_over_years.png": "/DataVisualization/static/media/netflix_content_added_over_years.629a1c66ed529ccb2df0.png",
     "index.html": "/DataVisualization/index.html",
-    "static/media/netflix_year_info.csv": "/DataVisualization/static/media/netflix_year_info.52fea2e092ed8d98a44c.csv",
-    "static/media/netflix_countries_genre_info.csv": "/DataVisualization/static/media/netflix_countries_genre_info.330bcb8d8c0ea288f89d.csv",
-    "static/media/netflix_countries_info.csv": "/DataVisualization/static/media/netflix_countries_info.8e6c9db1a64c10f72fb1.csv",
-    "static/media/netflix_ratings_info.csv": "/DataVisualization/static/media/netflix_ratings_info.613f48b97bff3f355970.csv",
-    "static/media/netflix_content_info.csv": "/DataVisualization/static/media/netflix_content_info.57d199737d335a58cfdd.csv",
-    "static/media/text_title.txt": "/DataVisualization/static/media/text_title.31d6cfe0d16ae931b73c.txt",
+    "static/media/netflix_year_info.csv": "/DataVisualization/static/media/netflix_year_info.e44d69a9695bfeb0b81e.csv",
+    "static/media/netflix_countries_genre_info.csv": "/DataVisualization/static/media/netflix_countries_genre_info.e27c77d7ae282351847f.csv",
+    "static/media/netflix_countries_info.csv": "/DataVisualization/static/media/netflix_countries_info.7d926bd069e34c2cc659.csv",
+    "static/media/netflix_ratings_info.csv": "/DataVisualization/static/media/netflix_ratings_info.612fe50422981d93a1f6.csv",
+    "static/media/netflix_content_info.csv": "/DataVisualization/static/media/netflix_content_info.53eeca5dffff01954b4d.csv",
     "main.e6c13ad2.css.map": "/DataVisualization/static/css/main.e6c13ad2.css.map",
-    "main.daa3c255.js.map": "/DataVisualization/static/js/main.daa3c255.js.map",
+    "main.df4abea7.js.map": "/DataVisualization/static/js/main.df4abea7.js.map",
     "787.7afbd3a0.chunk.js.map": "/DataVisualization/static/js/787.7afbd3a0.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.e6c13ad2.css",
-    "static/js/main.daa3c255.js"
+    "static/js/main.df4abea7.js"
   ]
 }
