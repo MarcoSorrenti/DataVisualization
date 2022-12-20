@@ -72,8 +72,7 @@ class SunburstZoomableChart extends React.Component {
             .style("cursor", "pointer")
             .on("click", clicked);
 
-        path.append("title")
-            .text(d => `${d.ancestors().map(d => d.data.name).reverse().join("/")}\n${format(d.value)}`);
+        path.append("title").text(d => `${d.ancestors().map(d => d.data.name).reverse().join("/")}\n${format(d.value)}`);
 
         const label = g.append("g")
             .attr("pointer-events", "none")

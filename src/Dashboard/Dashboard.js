@@ -176,7 +176,7 @@ class Dashboard extends React.Component {
         this.setState({
             openStatsInfo: true,
             title: "Netflix Dataset Information",
-            text: "Total records is the total number of Movies/TV Shows contents. This horizontal bar chart was created using the d3js library and shows what percentage of Netflix movies and TV shows are in the dataset."
+            text: "Total records is the total number of Movies/TV Shows contents. This chart shows what percentage of Netflix movies and TV shows are in the dataset."
         });
     }
 
@@ -188,7 +188,7 @@ class Dashboard extends React.Component {
         this.setState({
             openCategInfo: true,
             title: "Netflix Movies/TV Shows categories",
-            text: "This sunburst zoomable chart was created using the d3js library and allows you to select a TV Show / Movie based on the type of content, category and rating."
+            text: "This chart allows you to select a TV Show / Movie based on the type of content, category and rating."
         });
     }
 
@@ -200,7 +200,7 @@ class Dashboard extends React.Component {
         this.setState({
             openRatingInfo: true,
             title: "Netflix Ratings",
-            text: "This bar chart was created using the d3js library and it shows the amount of TV Shows / Movies divided by their rating (sorted by total number of released contents per rating)."
+            text: "This chart shows the amount of TV Shows / Movies divided by their rating (sorted by total number of released contents per rating)."
         });
     }
 
@@ -212,7 +212,7 @@ class Dashboard extends React.Component {
         this.setState({
             openReleaseInfo: true,
             title: "Netflix Contents Release over years",
-            text: "This bar chart was created using the d3js library and it shows the amount of TV Shows / Movies released every years since Netflix start publishing contents (years sorted by total number of released contents). "
+            text: "This chart shows the amount of TV Shows / Movies released every years since Netflix start publishing contents (years sorted by total number of released contents). "
         });
     }
 
@@ -224,7 +224,7 @@ class Dashboard extends React.Component {
         this.setState({
             openCountInfo: true,
             title: "Netflix Contents produced in countries",
-            text: "This bar chart was created using the d3js library and it shows the amount of TV Shows / Movies produced in the top countries (ones that produced more contents)."
+            text: "This chart shows the amount of TV Shows / Movies produced in the top countries (ones that produced more contents)."
         });
     }
 
@@ -236,7 +236,7 @@ class Dashboard extends React.Component {
         this.setState({
             openContentInfo: true,
             title: "Netflix TV Show/ Movies Release over years",
-            text: "This area chart was created using the matplotlib library (py) and it shows the amount of TV Shows and Movies release over years."
+            text: "This chart shows the amount of TV Shows and Movies release over years."
         });
     }
 
@@ -248,7 +248,7 @@ class Dashboard extends React.Component {
         this.setState({
             openStatsInfo: true,
             title: "Netflix TV Show/ Movies Release over years (cumulative)",
-            text: "This area chart was created using the matplotlib library (py) and it shows the cumulative amount of TV Shows and Movies release over years."
+            text: "This shows the cumulative amount of TV Shows and Movies release over years."
         });
     }
 
@@ -260,7 +260,7 @@ class Dashboard extends React.Component {
         this.setState({
             openContentCountryInfo: true,
             title: "Netflix TV Show / Movies produced in top 7 countries",
-            text: "This Stacked bar chart was created using the d3js library and it shows the amount of TV Shows / Movies splitted in the top countries (sum of Movies and TV Shows bigger or equal than 150 per country). This plot is interesting because we can check how the split TV Show/Movie varies by country."
+            text: "This chart shows the amount of TV Shows / Movies splitted in the top countries (sum of Movies and TV Shows bigger or equal than 150 per country). This plot is interesting because we can check how the split TV Show/Movie varies by country."
         });
     }
 
@@ -272,7 +272,7 @@ class Dashboard extends React.Component {
         this.setState({
             openTargetCountryInfo: true,
             title: "Netflix correlation between Country and Target",
-            text: "This graph was created using the matplotlib library (py) and it shows the difference of contents in relation to countries. It's interesting to note similarities between USA and UK, or Spain and Mexico (based on target), but at the same time we can have a look to the differencies between countries with different cultures (USA/UK and India )."
+            text: "This graph shows the difference of contents in relation to countries. It's interesting to note similarities between USA and UK, or Spain and Mexico (based on target), but at the same time we can have a look to the differencies between countries with different cultures (USA/UK and India )."
         });
     }
 
@@ -284,7 +284,7 @@ class Dashboard extends React.Component {
         this.setState({
             openWCTitleInfo: true,
             title: "Netflix Wordcloud with contents Title",
-            text: "This wordcloud was created using the matplotlib library (py) and it shows the main key words used in Netflix TV Shows and Movies titles."
+            text: "This wordcloud shows the main key words used in Netflix TV Shows and Movies titles."
         });
     }
 
@@ -296,7 +296,7 @@ class Dashboard extends React.Component {
         this.setState({
             openWCDescInfo: true,
             title: "Netflix Wordcloud with contents Descriptions",
-            text: "This wordcloud was created using the d3js library and it shows the main key words used in Netflix TV Shows and Movies descriptions. By moving the Max Words cursor, we can set the maximum amount of words inside the Wordcloud."
+            text: "This wordcloud shows the main key words used in Netflix TV Shows and Movies descriptions. By moving the Max Words cursor, we can set the maximum amount of words inside the Wordcloud."
         });
     }
 
@@ -345,6 +345,7 @@ class Dashboard extends React.Component {
                                     <DatasetInfoDialog title={this.state.title} text={this.state.text} open={this.state.openCategInfo} handleClose={this.handleCloseCategInfo} />
                                     <Typography variant="h5"> Netflix Movies/TV Shows </Typography>
                                 </Stack>
+                                <svg id="legend3" height={40} width={450} />
                                 <SunburstZoomableChart data={this.state.netflix_sunburst_data} size={600} />
                             </Paper>
                         </Grid>
@@ -397,7 +398,7 @@ class Dashboard extends React.Component {
                                         <InfoIcon sx={{ color: 'primary', fontSize: 15 }} />
                                     </IconButton>
                                     <DatasetInfoDialog title={this.state.title} text={this.state.text} open={this.state.openRatingInfo} handleClose={this.handleCloseRatingInfo} />
-                                    <Typography variant="h5"> Netflix Ratings </Typography>
+                                    <Typography variant="h5"> Netflix Target </Typography>
                                 </Stack>
                                 <BarChart data={this.state.netflix_ratings_info} size={500} color={'#e50914'} legend={true} />
                             </Paper>
@@ -450,33 +451,7 @@ class Dashboard extends React.Component {
                                 </Grid>
                                 <WordcloudChart data={this.state.netflix_text_description_txt} max_words={this.state.max_words} />
                             </Paper>
-                        </Grid>
-                        {/* BarChart: Release years */}
-                        {/*<Grid item xs={12} md={4} lg={4}>
-                            <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-                                <Stack direction="row" justifyContent="center-end" alignItems='center' spacing={1}>
-                                    <IconButton aria-label="info-stat" aria-controls="info-data" aria-haspopup="true" size='large' onClick={this.handleOpenReleaseInfo}>
-                                        <InfoIcon sx={{ color: 'primary', fontSize: 15 }} />
-                                    </IconButton>
-                                    <DatasetInfoDialog title={this.state.title} text={this.state.text} open={this.state.openReleaseInfo} handleClose={this.handleCloseReleaseInfo} />
-                                    <Typography variant="h5"> Netflix Contents Release </Typography>
-                                </Stack>
-                                <BarChart data={this.state.netflix_year_info} size={500} color={'#b20710'} legend={false}/>
-                            </Paper>
-                        </Grid>*/}
-                        {/* Area Chart: content added over years (cumulative) */}
-                        {/*<Grid item xs={12} md={6} lg={6}>
-                            <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-                                <Stack direction="row" justifyContent="center-end" alignItems='center' spacing={1}>
-                                    <IconButton aria-label="info-stat" aria-controls="info-data" aria-haspopup="true" size='large' onClick={this.handleOpenCumContentInfo}>
-                                        <InfoIcon sx={{ color: 'primary', fontSize: 15 }} />
-                                    </IconButton>
-                                    <DatasetInfoDialog title={this.state.title} text={this.state.text} open={this.state.openCumContentInfo} handleClose={this.handleCloseCumContentInfo} />
-                                    <Typography variant="h5"> Netflix Contents added over years [Cumulative]  </Typography>
-                                </Stack>
-                                <Image src={netflix_content_added_over_years_cumulative} />
-                            </Paper>
-                        </Grid>*/}
+                        </Grid>                        
                     </Grid>
 
                 </Container>
