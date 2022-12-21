@@ -85,7 +85,7 @@ class BarChart extends React.Component {
                 svg.append("text")
                     .text(r)
                     .attr("x", 350)
-                    .attr("y", 22 + 18 * i);
+                    .attr("y", 45 + 18 * i);
             });
         }
 

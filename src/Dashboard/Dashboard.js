@@ -1,6 +1,12 @@
 import React from 'react';
 import { csv } from 'd3-fetch';
 
+import FormControl from '@mui/material/FormControl';
+import InputLabel from '@mui/material/InputLabel';
+import MenuItem from '@mui/material/MenuItem';
+import Select from '@mui/material/Select';
+
+
 import Container from '@mui/material/Container';
 import Typography from '@mui/material/Typography';
 import Grid from '@mui/material/Grid';
@@ -34,10 +40,9 @@ import netflix_year_info from "./Components/data/netflix_year_info.csv";
 import netflix_ratings_info from "./Components/data/netflix_ratings_info.csv";
 import netflix_countries_info from "./Components/data/netflix_countries_info.csv";
 import netflix_countries_genre_info from "./Components/data/netflix_countries_genre_info.csv";
-import netflix_text_title from "./Components/data/text_title.txt";
-import netflix_text_description from "./Components/data/text_description.txt";
-import netflix_text_genre from "./Components/data/text_genre.txt";
 import netflix_categories_data from "./Components/data/netflix_sunburst_data";
+
+import netflix_text_all from "./Components/data/text_title.txt";
 
 class Dashboard extends React.Component {
     constructor(props) {
@@ -45,7 +50,7 @@ class Dashboard extends React.Component {
         this.state = {
             netflix_data: null,
             type: null,
-            category: null,
+            target: null,
 
             title: "",
             text: "",
@@ -67,10 +72,8 @@ class Dashboard extends React.Component {
             netflix_ratings_info: false,
             netflix_countries_info: false,
             netflix_countries_genre_info: false,
-            netflix_text_title_txt: fetch(netflix_text_title).then(r => r.text()).then(text => { this.state.netflix_text_title_txt = text }),
-            netflix_text_description_txt: fetch(netflix_text_description).then(r => r.text()).then(text => { this.state.netflix_text_description_txt = text }),
-            netflix_text_genre_txt: fetch(netflix_text_genre).then(r => r.text()).then(text => { this.state.netflix_text_genre_txt = text }),
-            max_words: 150,
+            netflix_text_all_txt: fetch(netflix_text_all).then(r => r.text()).then(text => { this.state.netflix_text_all_txt = text }),
+            max_words: 100,
             netflix_sunburst_data: netflix_categories_data
         };
 
@@ -330,7 +333,7 @@ class Dashboard extends React.Component {
                                     <DatasetInfoDialog title={this.state.title} text={this.state.text} open={this.state.openStatsInfo} handleClose={this.handleCloseStatsInfo} />
                                     <Typography variant="h5"> Netflix Dataset Information </Typography>
                                 </Stack>
-                                <DatasetInfo data={this.state.netflix_data} type={this.state.type} category={this.state.category} />
+                                <DatasetInfo data={this.state.netflix_data} type={this.state.type} />
                                 <svg id="legend" height={40} width={450} />
                                 <StackedBarChart data={this.state.netflix_content_info} />
                             </Paper>
@@ -345,14 +348,25 @@ class Dashboard extends React.Component {
                                     <DatasetInfoDialog title={this.state.title} text={this.state.text} open={this.state.openCategInfo} handleClose={this.handleCloseCategInfo} />
                                     <Typography variant="h5"> Netflix Movies/TV Shows </Typography>
                                 </Stack>
-                                <svg id="legend3" height={40} width={450} />
-                                <SunburstZoomableChart data={this.state.netflix_sunburst_data} size={600} />
+                                <SunburstZoomableChart data={this.state.netflix_sunburst_data} size={700} />
+                            </Paper>
+                        </Grid>
+                        {/* Area Chart: content added over years */}
+                        <Grid item xs={12} md={12} lg={12}>
+                            <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+                                <Stack direction="row" justifyContent="center-end" alignItems='center' spacing={1}>
+                                    <IconButton aria-label="info-stat" aria-controls="info-data" aria-haspopup="true" size='large' onClick={this.handleOpenContentInfo}>
+                                        <InfoIcon sx={{ color: 'primary', fontSize: 15 }} />
+                                    </IconButton>
+                                    <DatasetInfoDialog title={this.state.title} text={this.state.text} open={this.state.openContentInfo} handleClose={this.handleCloseContentInfo} />
+                                    <Typography variant="h5"> Netflix Contents added over years  </Typography>
+                                </Stack>
+                                <Image src={netflix_content_added_over_years} />
                             </Paper>
                         </Grid>
                         {/* BarChart: Countries */}
                         <Grid item xs={12} md={6} lg={6}>
                             <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-
                                 <Stack direction="row" justifyContent="center-end" alignItems='center' spacing={1}>
                                     <IconButton aria-label="info-stat" aria-controls="info-data" aria-haspopup="true" size='large' onClick={this.handleOpenCountInfo}>
                                         <InfoIcon sx={{ color: 'primary', fontSize: 15 }} />
@@ -375,19 +389,6 @@ class Dashboard extends React.Component {
                                 </Stack>
                                 <svg id="legend2" height={40} width={450} />
                                 <NormalizedStackedBarChart data={this.state.netflix_countries_genre_info} />
-                            </Paper>
-                        </Grid>
-                        {/* Area Chart: content added over years */}
-                        <Grid item xs={12} md={12} lg={12}>
-                            <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-                                <Stack direction="row" justifyContent="center-end" alignItems='center' spacing={1}>
-                                    <IconButton aria-label="info-stat" aria-controls="info-data" aria-haspopup="true" size='large' onClick={this.handleOpenContentInfo}>
-                                        <InfoIcon sx={{ color: 'primary', fontSize: 15 }} />
-                                    </IconButton>
-                                    <DatasetInfoDialog title={this.state.title} text={this.state.text} open={this.state.openContentInfo} handleClose={this.handleCloseContentInfo} />
-                                    <Typography variant="h5"> Netflix Contents added over years  </Typography>
-                                </Stack>
-                                <Image src={netflix_content_added_over_years} />
                             </Paper>
                         </Grid>
                         {/* BarChart: Ratings */}
@@ -424,9 +425,9 @@ class Dashboard extends React.Component {
                                         <InfoIcon sx={{ color: 'primary', fontSize: 15 }} />
                                     </IconButton>
                                     <DatasetInfoDialog title={this.state.title} text={this.state.text} open={this.state.openWCTitleInfo} handleClose={this.handleCloseWCTitleInfo} />
-                                    <Typography variant="h5">Netflix Titles Wordcloud</Typography>
+                                    <Typography variant="h5">Netflix Wordcloud</Typography>
                                 </Stack>
-                                <Image src={netflix_title}  height="500px"/>
+                                <Image src={netflix_title} height="500px" />
                             </Paper>
                         </Grid>
                         {/* Wordcloud: for descriptions*/}
@@ -437,21 +438,39 @@ class Dashboard extends React.Component {
                                         <InfoIcon sx={{ color: 'primary', fontSize: 15 }} />
                                     </IconButton>
                                     <DatasetInfoDialog title={this.state.title} text={this.state.text} open={this.state.openWCDescInfo} handleClose={this.handleCloseWCDescInfo} />
-                                    <Typography variant="h5">Netflix Descriptions Wordcloud</Typography>
+                                    <Typography variant="h5">Netflix Target Wordcloud</Typography>
                                 </Stack>
                                 <Grid container spacing={2}>
                                     <Grid item xs={12} sm container>
-                                        <Grid item xs={2} spacing={2}>
+                                        <Grid item xs={4} spacing={2}>
+                                            <FormControl color='background' sx={{ m: 1, width: { xs: 80, sm: 150, md: 200 } }}>
+                                                <InputLabel> Target </InputLabel>
+                                                <Select
+                                                    id='select-target'
+                                                    label='target'
+                                                    value={this.state.target ? this.state.target : 0}
+                                                    onChange={(event) => {
+                                                        this.setState({ target: event.target.value })
+                                                    }}
+                                                >
+                                                    <MenuItem value={0}> All </MenuItem>
+                                                    <MenuItem value={1}> Kids </MenuItem>
+                                                    <MenuItem value={2}> Teens </MenuItem>
+                                                    <MenuItem value={3}> Adults </MenuItem>  
+                                                </Select>
+                                            </FormControl>
+                                        </Grid>
+                                        <Grid item sx={{ paddingTop: 3, marginRight: 2 }}>
                                             <Typography variant="h7"> Max Words: </Typography>
                                         </Grid>
-                                        <Grid item xs={10}>
-                                            <Slider defaultValue={this.state.max_words} aria-label="Default" valueLabelDisplay="auto" step={10} min={50} max={300} onChange={(event) => { this.setState({ max_words: event.target.value }) }} />
+                                        <Grid item xs={6} sx={{ paddingTop: 3 }}>
+                                            <Slider defaultValue={this.state.max_words} aria-label="Default" valueLabelDisplay="auto" step={10} min={50} max={250} onChange={(event) => { this.setState({ max_words: event.target.value }) }} />
                                         </Grid>
                                     </Grid>
-                                </Grid>
-                                <WordcloudChart data={this.state.netflix_text_description_txt} max_words={this.state.max_words} />
+                                </Grid>                                
+                                <WordcloudChart data={this.state.netflix_text_all_txt} max_words={this.state.max_words} target={this.state.target}/>
                             </Paper>
-                        </Grid>                        
+                        </Grid>
                     </Grid>
 
                 </Container>

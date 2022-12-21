@@ -3,12 +3,19 @@ import React from 'react'
 import * as d3 from "d3"
 import d3Cloud from "d3-cloud";
 
+import netflix_text_kids from "./data/text_target_kids.txt";
+import netflix_text_teens from "./data/text_target_teens.txt";
+import netflix_text_adults from "./data/text_target_adults.txt";
+
 class WordcloudChart extends React.Component {
 
     constructor(props) {
         super(props)
         this.state = {
-            ref: React.createRef()
+            ref: React.createRef(),
+            netflix_text_kids_txt: fetch(netflix_text_kids).then(r => r.text()).then(text => { this.state.netflix_text_kids_txt = text }),
+            netflix_text_teens_txt: fetch(netflix_text_teens).then(r => r.text()).then(text => { this.state.netflix_text_teens_txt = text }),
+            netflix_text_adults_txt: fetch(netflix_text_adults).then(r => r.text()).then(text => { this.state.netflix_text_adults_txt = text })
         }
         this.createWordcloudChart = this.createWordcloudChart.bind(this)
     }
@@ -26,7 +33,26 @@ class WordcloudChart extends React.Component {
         const node = this.state.ref.current
         clean()
 
-        const text = this.props.data.toString()
+        let text = this.props.data.toString()
+        let font_s = 5
+        switch (this.props.target) {
+            case 0:
+                text = this.props.data.toString()
+                font_s = 5
+                break;
+            case 1:
+                text = this.state.netflix_text_kids_txt.toString()
+                font_s = 8
+                break;
+            case 2:
+                text = this.state.netflix_text_teens_txt.toString()
+                font_s = 9
+                break;
+            case 3:
+                text = this.state.netflix_text_adults_txt.toString()
+                font_s = 8
+                break;
+        }
 
         const stopwords = new Set("i,me,my,myself,we,us,our,ours,ourselves,you,your,yours,yourself,yourselves,he,him,his,himself,she,her,hers,herself,it,its,itself,they,them,their,theirs,themselves,what,which,who,whom,whose,this,that,these,those,am,is,are,was,were,be,been,being,have,has,had,having,do,does,did,doing,will,would,should,can,could,ought,i'm,you're,he's,she's,it's,we're,they're,i've,you've,we've,they've,i'd,you'd,he'd,she'd,we'd,they'd,i'll,you'll,he'll,she'll,we'll,they'll,isn't,aren't,wasn't,weren't,hasn't,haven't,hadn't,doesn't,don't,didn't,won't,wouldn't,shan't,shouldn't,can't,cannot,couldn't,mustn't,let's,that's,who's,what's,here's,there's,when's,where's,why's,how's,a,an,the,and,but,if,or,because,as,until,while,of,at,by,for,with,about,against,between,into,through,during,before,after,above,below,to,from,up,upon,down,in,out,on,off,over,under,again,further,then,once,here,there,when,where,why,how,all,any,both,each,few,more,most,other,some,such,no,nor,not,only,own,same,so,than,too,very,say,says,said,shall,&,1,2,3,4,5,6,7,8,9,0,ki,ii,la,vs,two,one,two,el,im,del,hai,aur,oh,los,ka,go,mr,de,get,10,x,y,iii,fu".split(","))
 
@@ -43,6 +69,7 @@ class WordcloudChart extends React.Component {
         WordCloud(words, {
             fontFamily: "Impact",
             maxWords: this.props.max_words,
+            fontScale: font_s
         })
 
         function WordCloud(text, {
@@ -52,11 +79,11 @@ class WordcloudChart extends React.Component {
             marginRight = 0, // right margin, in pixels
             marginBottom = 0, // bottom margin, in pixels
             marginLeft = 0, // left margin, in pixels
-            width = 1080, // outer width, in pixels
-            height = 700, // outer height, in pixels
-            maxWords = 180, // maximum number of words to extract from the text
+            width = 900, // outer width, in pixels
+            height = 535, // outer height, in pixels
+            maxWords = 150, // maximum number of words to extract from the text
             fontFamily = "sans-serif", // font family
-            fontScale = 2, // base font size
+            fontScale = 6, // base font size
             padding = 0, // amount of padding between the words (in pixels)
             rotate = 0, // a constant or function to rotate the words
             invalidation, // when this promise resolves, stop the simulation
@@ -92,8 +119,8 @@ class WordcloudChart extends React.Component {
                         .attr("opacity", 1.0)
                         .attr("fill", d3.schemeTableau10[d3.randomInt(0, d3.schemeTableau10.length)()])
                         .text(text)
-                        .on("mouseover", function () {d3.select(this).attr("opacity", 0.6);})
-                        .on("mouseout", function () {d3.select(this).attr("opacity", 1.0);})
+                        .on("mouseover", function () { d3.select(this).attr("opacity", 0.6); })
+                        .on("mouseout", function () { d3.select(this).attr("opacity", 1.0); })
                 });
 
             cloud.start();

@@ -93,6 +93,15 @@ class SunburstZoomableChart extends React.Component {
             .attr("pointer-events", "all")
             .on("click", clicked);
 
+        const ratings = ['TV-PG: Older Kids', 'TV-MA: Adults', 'TV-Y7-FV: Older Kids', 'TV-Y7: Older Kids', 'TV-14: Teens', 'R: Adults', 'TV-Y: Kids', 'NR: Adults', 'PG-13: Teens', 'TV-G: Kids', 'PG: Older Kids', 'G: Kids', 'UR: Adults', 'NC-17: Adults']
+
+        ratings.forEach(function (r, i) {
+            svg.append("text")
+                .text(r)
+                .attr("x", -70)
+                .attr("y", 22 + 18 * i);
+        });
+
         function clicked(event, p) {
             parent.datum(p.parent || root);
 
@@ -152,7 +161,7 @@ class SunburstZoomableChart extends React.Component {
 
     render() {
         return (
-            <svg ref={this.state.ref} width={this.props.size} height={this.props.size} />
+            <svg ref={this.state.ref} width={this.props.size + 250} height={this.props.size} />
         );
     }
 }

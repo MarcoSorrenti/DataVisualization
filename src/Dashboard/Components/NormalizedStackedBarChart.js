@@ -88,7 +88,7 @@ class NormalizedStackedBarChart extends React.Component {
             .join("text")
             .attr("transform", (d, i) => `translate(${x((d[0] + d[1]) / 2)},${y(d.data.country) + y.bandwidth()})`)
             .call(text => text.append("tspan")
-                .attr("y", "-0.38em")
+                .attr("y", "-0.59em")
                 .attr("font-weight", "bolder")
                 .attr("font-size", 14)
                 .attr("fill", "white")
