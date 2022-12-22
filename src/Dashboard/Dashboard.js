@@ -25,6 +25,7 @@ import DatasetInfoDialog from './Components/DatasetInfoDialog';
 import WordcloudChart from './Components/WordcloudChart';
 import SunburstZoomableChart from './Components/SunburstZoomableChart';
 import BarChart from './Components/BarChart';
+import GroupedBarChart from './Components/GroupedBarChart';
 import StackedBarChart from './Components/StackedBarChart';
 import NormalizedStackedBarChart from './Components/NormalizedStackedBarChart';
 
@@ -39,6 +40,7 @@ import netflix_content_info from "./Components/data/netflix_content_info.csv";
 import netflix_year_info from "./Components/data/netflix_year_info.csv";
 import netflix_ratings_info from "./Components/data/netflix_ratings_info.csv";
 import netflix_countries_info from "./Components/data/netflix_countries_info.csv";
+import netflix_grouped_countries_info from "./Components/data/netflix_countries_grouped_info.csv";
 import netflix_countries_genre_info from "./Components/data/netflix_countries_genre_info.csv";
 import netflix_categories_data from "./Components/data/netflix_sunburst_data";
 
@@ -72,6 +74,7 @@ class Dashboard extends React.Component {
             netflix_ratings_info: false,
             netflix_countries_info: false,
             netflix_countries_genre_info: false,
+            netflix_grouped_countries_info: false,
             netflix_text_all_txt: fetch(netflix_text_all).then(r => r.text()).then(text => { this.state.netflix_text_all_txt = text }),
             max_words: 100,
             netflix_sunburst_data: netflix_categories_data
@@ -173,6 +176,11 @@ class Dashboard extends React.Component {
     loadCSV6 = async () => {
         const d = await fetch(netflix_countries_genre_info).then(r => r.text())
         this.setState({ netflix_countries_genre_info: d });
+    }
+
+    loadCSV7 = async () => {
+        const d = await fetch(netflix_grouped_countries_info).then(r => r.text())
+        this.setState({ netflix_grouped_countries_info: d });
     }
 
     handleOpenStatsInfo() {
@@ -326,6 +334,7 @@ class Dashboard extends React.Component {
         this.loadCSV4();
         this.loadCSV5();
         this.loadCSV6();
+        this.loadCSV7();
     }
 
     render() {
@@ -388,7 +397,7 @@ class Dashboard extends React.Component {
                                     <DatasetInfoDialog title={this.state.title} text={this.state.text} open={this.state.openCountInfo} handleClose={this.handleCloseCountInfo} />
                                     <Typography variant="h5"> Netflix Countries Production </Typography>
                                 </Stack>
-                                <BarChart data={this.state.netflix_countries_info} size={500} color={'#e50914'} legend={false} />
+                                <GroupedBarChart data={this.state.netflix_grouped_countries_info} size={500}/>
                             </Paper>
                         </Grid>
                         {/* NormalizedStackedBarChart: Dataset Info */}

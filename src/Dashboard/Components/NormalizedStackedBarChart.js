@@ -26,7 +26,7 @@ class NormalizedStackedBarChart extends React.Component {
 
         const margin = { top: 5, right: 0, bottom: 0, left: 60 }
         const width = 450 - margin.left - margin.right
-        const height = width / 2 - margin.top - margin.bottom + 73
+        const height = width / 2 - margin.top - margin.bottom + 75
 
         clean();
 
