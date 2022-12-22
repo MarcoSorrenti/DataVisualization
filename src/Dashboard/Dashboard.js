@@ -179,7 +179,12 @@ class Dashboard extends React.Component {
         this.setState({
             openStatsInfo: true,
             title: "Netflix Dataset Information",
-            text: "Total records is the total number of Movies/TV Shows contents. This chart shows what percentage of Netflix movies and TV shows are in the dataset."
+            text: "Netflix is one of the most popular media and video streaming platforms, with over 8000 movies or tv shows available. \
+                This dataset consists of listings of all media available on Netflix, along with details such as ratings, release year, duration, country, etc.\
+                Total records is the total number of Movies/TV Shows contents. \
+                This chart shows what percentage of Netflix movies and TV shows are in the dataset.\
+                There are 6126 Movies and 2664 TV Shows.\
+                "
         });
     }
 
@@ -190,8 +195,10 @@ class Dashboard extends React.Component {
     handleOpenCategInfo() {
         this.setState({
             openCategInfo: true,
-            title: "Netflix Movies/TV Shows categories",
-            text: "This chart allows you to select a TV Show / Movie based on the type of content, category and rating."
+            title: "Netflix Contents Hierarchy",
+            text: "This chart allows you to select a TV Show / Movie based on the type of content, category and rating.\
+                Targets and categories with few records have been merged in \"Other\" label.\
+                With this graph it is possible to have an idea on the hierarchy of the media available on the Netflix platform."
         });
     }
 
@@ -227,7 +234,8 @@ class Dashboard extends React.Component {
         this.setState({
             openCountInfo: true,
             title: "Netflix Contents produced in countries",
-            text: "This chart shows the amount of TV Shows / Movies produced in the top countries (ones that produced more contents)."
+            text: "This chart shows the countries with the highest number of TV Shows / Movies produced.\
+            The most prolific producers of content for Netflix are, primarily, the USA, with India and the UK a significant distance behind."
         });
     }
 
@@ -239,7 +247,10 @@ class Dashboard extends React.Component {
         this.setState({
             openContentInfo: true,
             title: "Netflix TV Show/ Movies Release over years",
-            text: "This chart shows the amount of TV Shows and Movies release over years."
+            text: "This chart shows the amount of TV Shows and Movies release over years. \
+            This allows to better understands how Netflix is growing over the years, in fact can be seen that they published more and more contents over the years.\
+            There's a negative trend during the COVID pandemy.\
+            In 2021 there is a change: Netflix starts for the first time publishing more TV Shows than Movies."
         });
     }
 
@@ -262,7 +273,7 @@ class Dashboard extends React.Component {
     handleOpenContentCountryInfo() {
         this.setState({
             openContentCountryInfo: true,
-            title: "Netflix TV Show / Movies produced in top 7 countries",
+            title: "Netflix TV Show / Movies split produced in top 8 countries",
             text: "This chart shows the amount of TV Shows / Movies splitted in the top countries (sum of Movies and TV Shows bigger or equal than 150 per country). This plot is interesting because we can check how the split TV Show/Movie varies by country."
         });
     }
@@ -298,8 +309,9 @@ class Dashboard extends React.Component {
     handleOpenWCDescInfo() {
         this.setState({
             openWCDescInfo: true,
-            title: "Netflix Wordcloud with contents Descriptions",
-            text: "This wordcloud shows the main key words used in Netflix TV Shows and Movies descriptions. By moving the Max Words cursor, we can set the maximum amount of words inside the Wordcloud."
+            title: "Netflix Target Wordcloud",
+            text: "This wordcloud is interesting because shows the main key words used in Netflix TV Shows and Movies titles, but giving the opportunity to understand the difference between targets.\
+                By moving the Max Words cursor, we can set the maximum amount of words inside the Wordcloud."
         });
     }
 
@@ -334,6 +346,8 @@ class Dashboard extends React.Component {
                                     <Typography variant="h5"> Netflix Dataset Information </Typography>
                                 </Stack>
                                 <DatasetInfo data={this.state.netflix_data} type={this.state.type} />
+                                <Typography variant="body1"> Movies: 6126 available</Typography>
+                                <Typography variant="body1"> Tv Shows: 2664 available</Typography>
                                 <svg id="legend" height={40} width={450} />
                                 <StackedBarChart data={this.state.netflix_content_info} />
                             </Paper>
