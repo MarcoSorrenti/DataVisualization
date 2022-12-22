@@ -1,11 +1,11 @@
 {
   "files": {
     "main.css": "/DataVisualization/static/css/main.e6c13ad2.css",
-    "main.js": "/DataVisualization/static/js/main.644a29b0.js",
+    "main.js": "/DataVisualization/static/js/main.a17458e4.js",
     "static/js/787.7afbd3a0.chunk.js": "/DataVisualization/static/js/787.7afbd3a0.chunk.js",
     "static/media/Netflix_cleaned.csv": "/DataVisualization/static/media/Netflix_cleaned.d8a6d5407dc34d57f5fd.csv",
     "static/media/text_title.txt": "/DataVisualization/static/media/text_title.aee8a7703981ac2a51d3.txt",
-    "static/media/netflix_title.png": "/DataVisualization/static/media/netflix_title.f316e206dca342ff4b2b.png",
+    "static/media/netflix_title.png": "/DataVisualization/static/media/netflix_title.3f714c6d314c76e52d18.png",
     "static/media/netflix_country_target.png": "/DataVisualization/static/media/netflix_country_target.cd692d8fc7e2bb1f3f3b.png",
     "static/media/text_target_adults.txt": "/DataVisualization/static/media/text_target_adults.df688e42e60b67074ce2.txt",
     "static/media/text_target_teens.txt": "/DataVisualization/static/media/text_target_teens.ac89b513fc30432ad3b5.txt",
@@ -14,15 +14,16 @@
     "index.html": "/DataVisualization/index.html",
     "static/media/netflix_year_info.csv": "/DataVisualization/static/media/netflix_year_info.e44d69a9695bfeb0b81e.csv",
     "static/media/netflix_countries_genre_info.csv": "/DataVisualization/static/media/netflix_countries_genre_info.e27c77d7ae282351847f.csv",
+    "static/media/netflix_countries_grouped_info.csv": "/DataVisualization/static/media/netflix_countries_grouped_info.236b5fba6a49d76cf791.csv",
     "static/media/netflix_countries_info.csv": "/DataVisualization/static/media/netflix_countries_info.7d926bd069e34c2cc659.csv",
     "static/media/netflix_ratings_info.csv": "/DataVisualization/static/media/netflix_ratings_info.612fe50422981d93a1f6.csv",
     "static/media/netflix_content_info.csv": "/DataVisualization/static/media/netflix_content_info.53eeca5dffff01954b4d.csv",
     "main.e6c13ad2.css.map": "/DataVisualization/static/css/main.e6c13ad2.css.map",
-    "main.644a29b0.js.map": "/DataVisualization/static/js/main.644a29b0.js.map",
+    "main.a17458e4.js.map": "/DataVisualization/static/js/main.a17458e4.js.map",
     "787.7afbd3a0.chunk.js.map": "/DataVisualization/static/js/787.7afbd3a0.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.e6c13ad2.css",
-    "static/js/main.644a29b0.js"
+    "static/js/main.a17458e4.js"
   ]
 }
